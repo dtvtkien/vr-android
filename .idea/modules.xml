@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/VR_Android_Plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/VR_Android_Plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/VR_Android_Plugin.demo.iml" filepath="$PROJECT_DIR$/.idea/modules/app/VR_Android_Plugin.demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vrplayer/VR_Android_Plugin.vrplayer.iml" filepath="$PROJECT_DIR$/.idea/modules/vrplayer/VR_Android_Plugin.vrplayer.iml" />
+    </modules>
+  </component>
+</project>

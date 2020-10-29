@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/nguyentrungkien/Documents/Workshop/Files/FlutterWorkshop/VRAndroidPlugin/vrplayer/build/intermediates/res/merged/release/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/nguyentrungkien/.gradle/caches/transforms-2/files-2.1/69d3c09af5cd3428af054e806b1b1459/core-1.3.0/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/nguyentrungkien/Documents/Workshop/Files/FlutterWorkshop/VRAndroidPlugin/vrplayer/build/intermediates/res/merged/release/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/nguyentrungkien/.gradle/caches/transforms-2/files-2.1/69d3c09af5cd3428af054e806b1b1459/core-1.3.0/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/nguyentrungkien/Documents/Workshop/Files/FlutterWorkshop/VRAndroidPlugin/vrplayer/build/intermediates/res/merged/release/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/nguyentrungkien/.gradle/caches/transforms-2/files-2.1/69d3c09af5cd3428af054e806b1b1459/core-1.3.0/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/nguyentrungkien/Documents/Workshop/Files/FlutterWorkshop/VRAndroidPlugin/vrplayer/build/intermediates/res/merged/release/layout-v21/notification_action.xml",
+        "source": "/Users/nguyentrungkien/.gradle/caches/transforms-2/files-2.1/69d3c09af5cd3428af054e806b1b1459/core-1.3.0/res/layout-v21/notification_action.xml"
+    }
+]

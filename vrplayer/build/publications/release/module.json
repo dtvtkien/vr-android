@@ -1,0 +1,147 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.appixi.vrplugin",
+    "module": "androidvr",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "tqsrgualbvbpdjbn62cs4cd6yq"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "4.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "4.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-adapters",
+          "version": {
+            "requires": "4.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "androidvr-1.0.0.aar",
+          "url": "androidvr-1.0.0.aar",
+          "size": 82311,
+          "sha512": "fff0d361cfb46a7e239bf4c0dc0f39017c418e3d7b2db6d3acb0ba50910957dc58fefe207200a609579606f3bfb8f5c423d064b24fb7b5fd2e2e09412ba30203",
+          "sha256": "37dac8264f59096702ceefe729bfc39f11502ab25311fb3f278b163d548e3b19",
+          "sha1": "1797b420d861b5db798a906744d6f5d1bcb76c84",
+          "md5": "59d11925ae125349846b321423934978"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.2.1"
+          }
+        },
+        {
+          "group": "com.android.support.constraint",
+          "module": "constraint-layout",
+          "version": {
+            "requires": "2.0.2"
+          }
+        },
+        {
+          "group": "com.google.android.exoplayer",
+          "module": "exoplayer",
+          "version": {
+            "requires": "2.11.4"
+          }
+        },
+        {
+          "group": "com.github.bumptech.glide",
+          "module": "glide",
+          "version": {
+            "requires": "4.11.0"
+          }
+        },
+        {
+          "group": "com.github.ashqal",
+          "module": "MD360Player4Android",
+          "version": {
+            "requires": "2.5.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "4.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "4.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-adapters",
+          "version": {
+            "requires": "4.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "androidvr-1.0.0.aar",
+          "url": "androidvr-1.0.0.aar",
+          "size": 82311,
+          "sha512": "fff0d361cfb46a7e239bf4c0dc0f39017c418e3d7b2db6d3acb0ba50910957dc58fefe207200a609579606f3bfb8f5c423d064b24fb7b5fd2e2e09412ba30203",
+          "sha256": "37dac8264f59096702ceefe729bfc39f11502ab25311fb3f278b163d548e3b19",
+          "sha1": "1797b420d861b5db798a906744d6f5d1bcb76c84",
+          "md5": "59d11925ae125349846b321423934978"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/nguyentrungkien/Documents/Workshop/Files/FlutterWorkshop/VRAndroidPlugin/vrplayer/build/intermediates/res/merged/release/anim-v21/mtrl_bottom_sheet_slide_in.xml",
+        "source": "/Users/nguyentrungkien/.gradle/caches/transforms-2/files-2.1/9bc5fca9ec2ea19bccec7cdbe4b55bb1/material-1.2.1/res/anim-v21/mtrl_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "/Users/nguyentrungkien/Documents/Workshop/Files/FlutterWorkshop/VRAndroidPlugin/vrplayer/build/intermediates/res/merged/release/anim-v21/design_bottom_sheet_slide_in.xml",
+        "source": "/Users/nguyentrungkien/.gradle/caches/transforms-2/files-2.1/9bc5fca9ec2ea19bccec7cdbe4b55bb1/material-1.2.1/res/anim-v21/design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "/Users/nguyentrungkien/Documents/Workshop/Files/FlutterWorkshop/VRAndroidPlugin/vrplayer/build/intermediates/res/merged/release/anim-v21/design_bottom_sheet_slide_out.xml",
+        "source": "/Users/nguyentrungkien/.gradle/caches/transforms-2/files-2.1/9bc5fca9ec2ea19bccec7cdbe4b55bb1/material-1.2.1/res/anim-v21/design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "/Users/nguyentrungkien/Documents/Workshop/Files/FlutterWorkshop/VRAndroidPlugin/vrplayer/build/intermediates/res/merged/release/anim-v21/mtrl_bottom_sheet_slide_out.xml",
+        "source": "/Users/nguyentrungkien/.gradle/caches/transforms-2/files-2.1/9bc5fca9ec2ea19bccec7cdbe4b55bb1/material-1.2.1/res/anim-v21/mtrl_bottom_sheet_slide_out.xml"
+    }
+]

@@ -1,0 +1,3 @@
+include ':vrplayer'
+include ':demo'
+rootProject.name = "VR Android Plugin"

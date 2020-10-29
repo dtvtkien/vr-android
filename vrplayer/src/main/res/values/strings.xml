@@ -1,0 +1,8 @@
+<resources>
+    <string name="vr_player_title">VRPlayer</string>
+    <string name="simple_but_powerful">Simple But Powerful</string>
+    <string name="control_title">Play/Pause</string>
+    <string name="invalid_progressive_playback">Invalid progressive playback</string>
+    <string name="unknown">Unknown</string>
+    <string name="ok">OK</string>
+</resources>

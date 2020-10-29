@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/nguyentrungkien/Documents/Workshop/Files/FlutterWorkshop/VRAndroidPlugin/vrplayer/build/intermediates/res/merged/release/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/nguyentrungkien/.gradle/caches/transforms-2/files-2.1/bdfff4d9549d4840bbfa3d123ece3a06/appcompat-1.2.0/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/nguyentrungkien/Documents/Workshop/Files/FlutterWorkshop/VRAndroidPlugin/vrplayer/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/nguyentrungkien/.gradle/caches/transforms-2/files-2.1/bdfff4d9549d4840bbfa3d123ece3a06/appcompat-1.2.0/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}
