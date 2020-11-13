@@ -16,22 +16,5 @@
             android:id="@+id/player"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <RelativeLayout
-            android:id="@+id/layout_header"
-            android:layout_width="match_parent"
-            android:layout_height="33dp"
-            android:background="@color/bg_media_controller"
-            android:visibility="gone">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="3dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="@{()-> activity.onBackClick()}"
-                android:src="@drawable/ic_back" />
-        </RelativeLayout>
     </FrameLayout>
 </layout>
