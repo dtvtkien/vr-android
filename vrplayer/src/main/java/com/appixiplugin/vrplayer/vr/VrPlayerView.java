@@ -2,10 +2,11 @@ package com.appixiplugin.vrplayer.vr;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.net.Uri;
+import android.content.res.Configuration;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
@@ -15,19 +16,50 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 
+import com.appixiplugin.vrplayer.vr.callback.MediaControllerCallback;
+import com.appixiplugin.vrplayer.vr.callback.MediaPlayerStateChanged;
+import com.appixiplugin.vrplayer.vr.plate.MediaConstants;
 import com.asha.vrlib.MD360Director;
 import com.asha.vrlib.MD360DirectorFactory;
 import com.asha.vrlib.MDVRLibrary;
+import com.asha.vrlib.model.BarrelDistortionConfig;
 import com.asha.vrlib.model.MDPinchConfig;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.ProgressiveMediaSource;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 
-public class VrPlayerView extends FrameLayout implements VrMediaController.VRControl {
-    private SurfaceView glSurfaceView;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
+public class VrPlayerView extends FrameLayout {
+    private static final String TAG = VrPlayerView.class.getCanonicalName();
+    private static final float THRESHOLD_MOVE_ACTION = 50f;
+
+    // Media renderer -> VR renderer
     private MDVRLibrary vrLibrary;
+
+    // Custom media controller & video surface view
+    private SurfaceView glSurfaceView;
+    private VrMediaController vrMediaController;
+
+    // Media player -> Using ExoPlayer2 with an adapter to adapt with [IMediaController]
     private SimpleExoPlayer exoPlayer;
+    private ExoMediaPlayerAdapter vrPlayerAdapter;
+
+    // RxAndroid objects
+    private CompositeDisposable vrViewCompositeDisposable;
+    private Disposable vrControllerDisposable;
+
+    // Callback for Activity
+    private MediaControllerCallback mediaControllerCallback;
+
+    // Check if touch action MOVE is followed by action UP or not
+    private boolean touchUpAfterMove;
+    private float touchDownX;
+    private float touchDownY;
 
     public VrPlayerView(@NonNull Context context) {
         super(context);
@@ -52,26 +84,132 @@ public class VrPlayerView extends FrameLayout implements VrMediaController.VRCon
 
     private void init() {
         setKeepScreenOn(true);
+        vrViewCompositeDisposable = new CompositeDisposable();
         glSurfaceView = new GLSurfaceView(getContext());
         addView(glSurfaceView);
+        vrMediaController = new VrMediaController(getContext());
+        addView(vrMediaController);
+        autoHideController();
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                touchDownX = ev.getX();
+                touchDownY = ev.getY();
+                touchUpAfterMove = false;
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                float moveX = ev.getX();
+                float moveY = ev.getY();
+                float movedDistance = (float) Math.sqrt(Math.pow(moveX - touchDownX, 2) + Math.pow(moveY - touchDownY, 2));
+                if (movedDistance > THRESHOLD_MOVE_ACTION) {
+                    touchUpAfterMove = true;
+                }
+                break;
+
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                // Just touch down then touch up without move
+                if (!touchUpAfterMove) {
+                    autoHideController();
+                }
+                break;
+            default:
+                break;
+        }
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    protected void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        switch (newConfig.orientation) {
+            case Configuration.ORIENTATION_LANDSCAPE:
+            case Configuration.ORIENTATION_PORTRAIT:
+                autoHideController();
+                break;
+        }
+    }
+
+    public void setMediaControllerCallback(MediaControllerCallback callback) {
+        this.mediaControllerCallback = callback;
+    }
+
+    public void onPause() {
+        if (vrPlayerAdapter != null) {
+            vrPlayerAdapter.pause();
+        }
+    }
+
+    public void onResume() {
+        if (vrPlayerAdapter != null) {
+            vrPlayerAdapter.play();
+        }
+    }
+
+    public void onDestroy() {
+        if (vrPlayerAdapter != null) {
+            vrPlayerAdapter.release();
+        }
+        if (vrViewCompositeDisposable != null) {
+            vrViewCompositeDisposable.dispose();
+        }
     }
 
     public void prepare(String path) {
         exoPlayer = new SimpleExoPlayer.Builder(getContext()).build();
-        MediaSource mediaSource = buildMediaSource(path);
-        if (exoPlayer != null && mediaSource != null) {
-            exoPlayer.prepare(mediaSource);
-            prepareVrLibrary();
+        prepareVrLibrary();
+        vrPlayerAdapter = new ExoMediaPlayerAdapter(getContext(), path, vrLibrary, exoPlayer,
+                new MediaPlayerStateChanged() {
+                    @Override
+                    public void onMediaClosed() {
+                        if (mediaControllerCallback != null) {
+                            mediaControllerCallback.onClosePlayer();
+                        }
+                    }
+
+                    @Override
+                    public void onDisplayModeChanged(MediaConstants.DisplayMode mode) {
+                        vrMediaController.changeMode(mode);
+                        if (mediaControllerCallback != null) {
+                            mediaControllerCallback.onChangedDisplayMode(mode);
+                        }
+                    }
+
+                    @Override
+                    public void onPlayControlChanged(boolean isPlaying) {
+                        vrMediaController.changedPlayState(isPlaying);
+                    }
+
+                    @Override
+                    public void onProgressChanged(long currentPosition, long duration) {
+                        vrMediaController.changedProgress(currentPosition, duration);
+                    }
+                });
+        vrMediaController.setMediaPlayer(vrPlayerAdapter);
+    }
+
+    private void autoHideController() {
+        vrMediaController.show();
+        if (vrControllerDisposable != null) {
+            vrViewCompositeDisposable.remove(vrControllerDisposable);
         }
+        vrControllerDisposable = Observable.timer(3000, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(delay -> vrMediaController.hide());
+        vrViewCompositeDisposable.add(vrControllerDisposable);
     }
 
     private void prepareVrLibrary() {
         vrLibrary = MDVRLibrary.with(getContext())
-                .displayMode(MDVRLibrary.DISPLAY_MODE_GLASS)
-                .interactiveMode(MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION)
                 .projectionMode(MDVRLibrary.PROJECTION_MODE_SPHERE)
                 .pinchConfig(new MDPinchConfig().setDefaultValue(0.7f).setMin(0.5f))
                 .pinchEnabled(true)
+                .barrelDistortionConfig(new BarrelDistortionConfig().setParamA(-0.036).setParamB(0.36))
                 .directorFactory(new MD360DirectorFactory() {
                     @Override
                     public MD360Director createDirector(int index) {
@@ -80,76 +218,11 @@ public class VrPlayerView extends FrameLayout implements VrMediaController.VRCon
                 })
                 .asVideo(surface -> {
                     // IjkMediaPlayer || MediaPlayer || ExoPlayer
-                    exoPlayer.setVideoSurface(surface);
+                    vrViewCompositeDisposable.add(Observable.just(surface)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(surface1 -> exoPlayer.setVideoSurface(surface1)));
                 })
                 .build(glSurfaceView);
-        vrLibrary.setAntiDistortionEnabled(true);
-    }
-
-    @Override
-    public void onInteractiveClick(int currentMode) {
-        if (currentMode == MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION) {
-            vrLibrary.switchInteractiveMode(getContext(), MDVRLibrary.INTERACTIVE_MODE_TOUCH);
-        } else {
-            vrLibrary.switchInteractiveMode(getContext(), MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION);
-        }
-    }
-
-    @Override
-    public void onDisplayClick(int currentMode) {
-        if (currentMode == MDVRLibrary.DISPLAY_MODE_GLASS) {
-            vrLibrary.switchDisplayMode(getContext(), MDVRLibrary.DISPLAY_MODE_NORMAL);
-            vrLibrary.setAntiDistortionEnabled(false);
-        } else {
-            vrLibrary.switchDisplayMode(getContext(), MDVRLibrary.DISPLAY_MODE_GLASS);
-            vrLibrary.setAntiDistortionEnabled(true);
-        }
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (vrLibrary != null) {
-            vrLibrary.handleTouchEvent(event);
-        }
-        return true;
-    }
-
-    public void onPause() {
-        if (vrLibrary != null) {
-            vrLibrary.onPause(getContext());
-        }
-        if (exoPlayer != null) {
-            exoPlayer.setPlayWhenReady(false);
-        }
-    }
-
-    public void onResume() {
-        if (vrLibrary != null) {
-            vrLibrary.onResume(getContext());
-        }
-        if (exoPlayer != null) {
-            exoPlayer.setPlayWhenReady(true);
-        }
-    }
-
-    public void onDestroy() {
-        if (vrLibrary != null) {
-            vrLibrary.onDestroy();
-        }
-        if (exoPlayer != null) {
-            exoPlayer.setVideoSurface(null);
-            exoPlayer.release();
-        }
-    }
-
-    private MediaSource buildMediaSource(String path) {
-        return buildMediaSource(Uri.parse(path));
-    }
-
-    private MediaSource buildMediaSource(Uri uri) {
-        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getContext(), "VR-app");
-        // Create a media source using the supplied URI
-        return new ProgressiveMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(uri);
     }
 }
