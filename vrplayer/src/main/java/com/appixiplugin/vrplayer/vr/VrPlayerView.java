@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
