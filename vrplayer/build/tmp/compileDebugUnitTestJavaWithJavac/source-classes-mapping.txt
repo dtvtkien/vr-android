@@ -1,2 +1,0 @@
-com/appixiplugin/vrplayer/ExampleUnitTest.java
- com.appixiplugin.vrplayer.ExampleUnitTest

@@ -4,22 +4,18 @@ package com.appixiplugin.vrplayer.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.Bindable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import com.appixiplugin.vrplayer.R;
-import com.appixiplugin.vrplayer.VrPlayerActivity;
+import com.appixiplugin.vrplayer.presentation.VrPlayerActivity;
 import com.appixiplugin.vrplayer.vr.VrPlayerView;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class ActivityVrPlayerBinding extends ViewDataBinding {
-  @NonNull
-  public final RelativeLayout layoutHeader;
-
   @NonNull
   public final VrPlayerView player;
 
@@ -27,9 +23,8 @@ public abstract class ActivityVrPlayerBinding extends ViewDataBinding {
   protected VrPlayerActivity mActivity;
 
   protected ActivityVrPlayerBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      RelativeLayout layoutHeader, VrPlayerView player) {
+      VrPlayerView player) {
     super(_bindingComponent, _root, _localFieldCount);
-    this.layoutHeader = layoutHeader;
     this.player = player;
   }
 

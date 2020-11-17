@@ -1,5 +1,34 @@
-com/appixiplugin/vrplayer/utils/StringUtils.java
- com.appixiplugin.vrplayer.utils.StringUtils
+com/appixiplugin/vrplayer/vr/callback/MediaPlayerStateChanged.java
+ com.appixiplugin.vrplayer.vr.callback.MediaPlayerStateChanged
+com/appixiplugin/vrplayer/vr/callback/MediaControllerCallback.java
+ com.appixiplugin.vrplayer.vr.callback.MediaControllerCallback
+com/appixiplugin/vrplayer/model/VideoSeries.java
+ com.appixiplugin.vrplayer.model.VideoSeries
+com/appixiplugin/vrplayer/model/VideoModel.java
+ com.appixiplugin.vrplayer.model.VideoModel
+com/appixiplugin/vrplayer/vr/VrPlayerView.java
+ com.appixiplugin.vrplayer.vr.VrPlayerView
+ com.appixiplugin.vrplayer.vr.VrPlayerView$1
+ com.appixiplugin.vrplayer.vr.VrPlayerView$2
+com/appixiplugin/vrplayer/utils/DurationUtils.java
+ com.appixiplugin.vrplayer.utils.DurationUtils
+com/appixiplugin/vrplayer/vr/ExoMediaPlayerAdapter.java
+ com.appixiplugin.vrplayer.vr.ExoMediaPlayerAdapter
+ com.appixiplugin.vrplayer.vr.ExoMediaPlayerAdapter$1
+ com.appixiplugin.vrplayer.vr.ExoMediaPlayerAdapter$ExoPlayerListener
+com/appixiplugin/vrplayer/DataBindingTriggerClass.java
+ com.appixiplugin.vrplayer.DataBindingTriggerClass
+com/appixiplugin/vrplayer/vr/VrMediaController.java
+ com.appixiplugin.vrplayer.vr.VrMediaController
+ com.appixiplugin.vrplayer.vr.VrMediaController$1
+com/appixiplugin/vrplayer/vr/plate/MediaConstants.java
+ com.appixiplugin.vrplayer.vr.plate.MediaConstants
+ com.appixiplugin.vrplayer.vr.plate.MediaConstants$DisplayMode
+ com.appixiplugin.vrplayer.vr.plate.MediaConstants$InteractiveMode
+com/appixiplugin/vrplayer/databinding/VrMediaControllerBinding.java
+ com.appixiplugin.vrplayer.databinding.VrMediaControllerBinding
+com/appixiplugin/vrplayer/vr/plate/IMediaPlayer.java
+ com.appixiplugin.vrplayer.vr.plate.IMediaPlayer
 com/appixiplugin/vrplayer/utils/StatusBarUtil.java
  com.appixiplugin.vrplayer.utils.StatusBarUtil
 com/appixiplugin/vrplayer/BuildConfig.java
@@ -8,20 +37,10 @@ com/appixiplugin/vrplayer/base/BaseActivity.java
  com.appixiplugin.vrplayer.base.BaseActivity
 com/appixiplugin/vrplayer/databinding/ActivityVrPlayerBinding.java
  com.appixiplugin.vrplayer.databinding.ActivityVrPlayerBinding
-com/appixiplugin/vrplayer/vr/VrPlayerView.java
- com.appixiplugin.vrplayer.vr.VrPlayerView
- com.appixiplugin.vrplayer.vr.VrPlayerView$1
-com/appixiplugin/vrplayer/DataBindingTriggerClass.java
- com.appixiplugin.vrplayer.DataBindingTriggerClass
-com/appixiplugin/vrplayer/vr/VrMediaController.java
- com.appixiplugin.vrplayer.vr.VrMediaController
- com.appixiplugin.vrplayer.vr.VrMediaController$1
- com.appixiplugin.vrplayer.vr.VrMediaController$2
- com.appixiplugin.vrplayer.vr.VrMediaController$3
- com.appixiplugin.vrplayer.vr.VrMediaController$4
- com.appixiplugin.vrplayer.vr.VrMediaController$5
- com.appixiplugin.vrplayer.vr.VrMediaController$6
- com.appixiplugin.vrplayer.vr.VrMediaController$MediaPlayerControl
- com.appixiplugin.vrplayer.vr.VrMediaController$VRControl
-com/appixiplugin/vrplayer/VrPlayerActivity.java
- com.appixiplugin.vrplayer.VrPlayerActivity
+com/appixiplugin/vrplayer/presentation/VrPlayerActivity.java
+ com.appixiplugin.vrplayer.presentation.VrPlayerActivity
+ com.appixiplugin.vrplayer.presentation.VrPlayerActivity$1
+ com.appixiplugin.vrplayer.presentation.VrPlayerActivity$2
+com/appixiplugin/vrplayer/vr/binding/VrMediaBindingAdapter.java
+ com.appixiplugin.vrplayer.vr.binding.VrMediaBindingAdapter
+ com.appixiplugin.vrplayer.vr.binding.VrMediaBindingAdapter$1

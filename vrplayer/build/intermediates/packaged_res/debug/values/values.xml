@@ -11,7 +11,13 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
+    <dimen name="large_spacing">48dp</dimen>
     <dimen name="media_control_height">50dp</dimen>
+    <dimen name="medium_spacing">16dp</dimen>
+    <dimen name="small_spacing">8dp</dimen>
+    <dimen name="tiny_spacing">4dp</dimen>
+    <dimen name="x_medium_spacing">24dp</dimen>
+    <dimen name="xx_medium_spacing">32dp</dimen>
     <item name="statusbarutil_fake_status_bar_view" type="id"/>
     <item name="statusbarutil_translucent_view" type="id"/>
     <string name="control_title">Play/Pause</string>
@@ -25,9 +31,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="MediaController_Text">
-        <item name="android:textColor">#ffffffff</item>
+    <style name="MediaControllerTextTheme">
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14sp</item>
+    </style>
+    <style name="SeekBarTheme" parent="Widget.AppCompat.SeekBar">
+        <item name="android:progressBackgroundTint">@color/colorPrimaryDark</item>
+        <item name="android:progressTint">@color/white</item>
+        <item name="android:colorControlActivated">@color/white</item>
+        <item name="android:thumbTint">@color/white</item>
     </style>
     <style name="Theme.DemoVr180" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->

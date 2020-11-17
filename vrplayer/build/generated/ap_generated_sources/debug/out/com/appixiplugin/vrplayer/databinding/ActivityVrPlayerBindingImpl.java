@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.view.View;
 @SuppressWarnings("unchecked")
-public class ActivityVrPlayerBindingImpl extends ActivityVrPlayerBinding implements com.appixiplugin.vrplayer.generated.callback.OnClickListener.Listener {
+public class ActivityVrPlayerBindingImpl extends ActivityVrPlayerBinding  {
 
     @Nullable
     private static final androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes;
@@ -14,36 +14,27 @@ public class ActivityVrPlayerBindingImpl extends ActivityVrPlayerBinding impleme
     static {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.player, 2);
-        sViewsWithIds.put(R.id.layout_header, 3);
+        sViewsWithIds.put(R.id.player, 1);
     }
     // views
     @NonNull
     private final android.widget.FrameLayout mboundView0;
-    @NonNull
-    private final androidx.appcompat.widget.AppCompatImageView mboundView1;
     // variables
-    @Nullable
-    private final android.view.View.OnClickListener mCallback1;
     // values
     // listeners
     // Inverse Binding Event Handlers
 
     public ActivityVrPlayerBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 4, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 2, sIncludes, sViewsWithIds));
     }
     private ActivityVrPlayerBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
-            , (android.widget.RelativeLayout) bindings[3]
-            , (com.appixiplugin.vrplayer.vr.VrPlayerView) bindings[2]
+            , (com.appixiplugin.vrplayer.vr.VrPlayerView) bindings[1]
             );
         this.mboundView0 = (android.widget.FrameLayout) bindings[0];
         this.mboundView0.setTag(null);
-        this.mboundView1 = (androidx.appcompat.widget.AppCompatImageView) bindings[1];
-        this.mboundView1.setTag(null);
         setRootTag(root);
         // listeners
-        mCallback1 = new com.appixiplugin.vrplayer.generated.callback.OnClickListener(this, 1);
         invalidateAll();
     }
 
@@ -69,7 +60,7 @@ public class ActivityVrPlayerBindingImpl extends ActivityVrPlayerBinding impleme
     public boolean setVariable(int variableId, @Nullable Object variable)  {
         boolean variableSet = true;
         if (BR.activity == variableId) {
-            setActivity((com.appixiplugin.vrplayer.VrPlayerActivity) variable);
+            setActivity((com.appixiplugin.vrplayer.presentation.VrPlayerActivity) variable);
         }
         else {
             variableSet = false;
@@ -77,13 +68,8 @@ public class ActivityVrPlayerBindingImpl extends ActivityVrPlayerBinding impleme
             return variableSet;
     }
 
-    public void setActivity(@Nullable com.appixiplugin.vrplayer.VrPlayerActivity Activity) {
+    public void setActivity(@Nullable com.appixiplugin.vrplayer.presentation.VrPlayerActivity Activity) {
         this.mActivity = Activity;
-        synchronized(this) {
-            mDirtyFlags |= 0x1L;
-        }
-        notifyPropertyChanged(BR.activity);
-        super.requestRebind();
     }
 
     @Override
@@ -100,32 +86,10 @@ public class ActivityVrPlayerBindingImpl extends ActivityVrPlayerBinding impleme
             dirtyFlags = mDirtyFlags;
             mDirtyFlags = 0;
         }
-        com.appixiplugin.vrplayer.VrPlayerActivity activity = mActivity;
         // batch finished
-        if ((dirtyFlags & 0x2L) != 0) {
-            // api target 1
-
-            this.mboundView1.setOnClickListener(mCallback1);
-        }
     }
     // Listener Stub Implementations
     // callback impls
-    public final void _internalCallbackOnClick(int sourceId , android.view.View callbackArg_0) {
-        // localize variables for thread safety
-        // activity != null
-        boolean activityJavaLangObjectNull = false;
-        // activity
-        com.appixiplugin.vrplayer.VrPlayerActivity activity = mActivity;
-
-
-
-        activityJavaLangObjectNull = (activity) != (null);
-        if (activityJavaLangObjectNull) {
-
-
-            activity.onBackClick();
-        }
-    }
     // dirty flag
     private  long mDirtyFlags = 0xffffffffffffffffL;
     /* flag mapping

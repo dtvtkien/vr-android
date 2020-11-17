@@ -7,6 +7,7 @@ import androidx.databinding.DataBinderMapper;
 import androidx.databinding.DataBindingComponent;
 import androidx.databinding.ViewDataBinding;
 import com.appixiplugin.vrplayer.databinding.ActivityVrPlayerBindingImpl;
+import com.appixiplugin.vrplayer.databinding.VrMediaControllerBindingImpl;
 import java.lang.IllegalArgumentException;
 import java.lang.Integer;
 import java.lang.Object;
@@ -20,10 +21,13 @@ import java.util.List;
 public class DataBinderMapperImpl extends DataBinderMapper {
   private static final int LAYOUT_ACTIVITYVRPLAYER = 1;
 
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(1);
+  private static final int LAYOUT_VRMEDIACONTROLLER = 2;
+
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(2);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.appixiplugin.vrplayer.R.layout.activity_vr_player, LAYOUT_ACTIVITYVRPLAYER);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.appixiplugin.vrplayer.R.layout.vr_media_controller, LAYOUT_VRMEDIACONTROLLER);
   }
 
   @Override
@@ -40,6 +44,12 @@ public class DataBinderMapperImpl extends DataBinderMapper {
             return new ActivityVrPlayerBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for activity_vr_player is invalid. Received: " + tag);
+        }
+        case  LAYOUT_VRMEDIACONTROLLER: {
+          if ("layout/vr_media_controller_0".equals(tag)) {
+            return new VrMediaControllerBindingImpl(component, new View[]{view});
+          }
+          throw new IllegalArgumentException("The tag for vr_media_controller is invalid. Received: " + tag);
         }
       }
     }
@@ -58,6 +68,12 @@ public class DataBinderMapperImpl extends DataBinderMapper {
         throw new RuntimeException("view must have a tag");
       }
       switch(localizedLayoutId) {
+        case LAYOUT_VRMEDIACONTROLLER: {
+          if("layout/vr_media_controller_0".equals(tag)) {
+            return new VrMediaControllerBindingImpl(component, views);
+          }
+          throw new IllegalArgumentException("The tag for vr_media_controller is invalid. Received: " + tag);
+        }
       }
     }
     return null;
@@ -86,19 +102,21 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerBrLookup {
-    static final SparseArray<String> sKeys = new SparseArray<String>(2);
+    static final SparseArray<String> sKeys = new SparseArray<String>(3);
 
     static {
       sKeys.put(0, "_all");
       sKeys.put(1, "activity");
+      sKeys.put(2, "mediaPlayer");
     }
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(1);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(2);
 
     static {
       sKeys.put("layout/activity_vr_player_0", com.appixiplugin.vrplayer.R.layout.activity_vr_player);
+      sKeys.put("layout/vr_media_controller_0", com.appixiplugin.vrplayer.R.layout.vr_media_controller);
     }
   }
 }

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.ashqal:MD360Player4Android:2.5.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30ca1397605010d60d98e1a973ce53cd/jetified-MD360Player4Android-2.5.0/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30ca1397605010d60d98e1a973ce53cd/jetified-MD360Player4Android-2.5.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30ca1397605010d60d98e1a973ce53cd/jetified-MD360Player4Android-2.5.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30ca1397605010d60d98e1a973ce53cd/jetified-MD360Player4Android-2.5.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />

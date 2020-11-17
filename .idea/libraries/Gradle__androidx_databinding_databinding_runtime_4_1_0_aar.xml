@@ -2,8 +2,8 @@
   <library name="Gradle: androidx.databinding:databinding-runtime:4.1.0@aar">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1b80c67c23d684f4ad7b7d7e6cd772f7/databinding-runtime-4.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1b80c67c23d684f4ad7b7d7e6cd772f7/databinding-runtime-4.1.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1b80c67c23d684f4ad7b7d7e6cd772f7/databinding-runtime-4.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1b80c67c23d684f4ad7b7d7e6cd772f7/databinding-runtime-4.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
