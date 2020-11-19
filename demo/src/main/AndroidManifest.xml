@@ -22,7 +22,7 @@
 
         <activity
             android:name="com.appixiplugin.vrplayer.presentation.VrPlayerActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

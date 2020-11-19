@@ -33,6 +33,8 @@ public interface IMediaPlayer {
 
     void seekTo(float progressPercent);
 
+    void seekEnded();
+
     /**
      * If we just have 2 mode VR, then this function will use as a trigger,
      * switch between those 2 modes

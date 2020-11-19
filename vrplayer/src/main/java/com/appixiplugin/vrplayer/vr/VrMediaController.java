@@ -88,7 +88,7 @@ class VrMediaController extends FrameLayout {
             case STEREO:
                 binding.motionLayoutControlBox.setVisibility(GONE);
                 binding.constraintVolume.setVisibility(GONE);
-                binding.imgSettings.setVisibility(VISIBLE);
+                binding.imgSettings.setVisibility(GONE);
                 break;
         }
     }

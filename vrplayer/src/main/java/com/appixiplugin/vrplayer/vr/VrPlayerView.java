@@ -171,6 +171,16 @@ public class VrPlayerView extends FrameLayout {
                     }
 
                     @Override
+                    public void onUserInteracting() {
+                        vrMediaController.show();
+                    }
+
+                    @Override
+                    public void onInteractiveEnded() {
+                        autoHideController();
+                    }
+
+                    @Override
                     public void onDisplayModeChanged(MediaConstants.DisplayMode mode) {
                         vrMediaController.changeMode(mode);
                         if (mediaControllerCallback != null) {

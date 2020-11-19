@@ -65,7 +65,6 @@ public class ExoMediaPlayerAdapter implements IMediaPlayer {
         this.callback = callback;
         initMediaInformation();
         setupExoPlayer();
-        setupRendererLibrary();
     }
 
     @Override
@@ -109,6 +108,16 @@ public class ExoMediaPlayerAdapter implements IMediaPlayer {
     public void seekTo(float progressPercent) {
         long seekToPosition = (long) (progressPercent * liveDuration);
         exoPlayer.seekTo(seekToPosition);
+        if (callback != null) {
+            callback.onUserInteracting();
+        }
+    }
+
+    @Override
+    public void seekEnded() {
+        if (callback != null) {
+            callback.onInteractiveEnded();
+        }
     }
 
     @Override
@@ -179,12 +188,6 @@ public class ExoMediaPlayerAdapter implements IMediaPlayer {
         }
     }
 
-    private void setupRendererLibrary() {
-        mdVrLibrary.switchDisplayMode(context, MDVRLibrary.DISPLAY_MODE_NORMAL);
-        mdVrLibrary.switchInteractiveMode(context, MDVRLibrary.INTERACTIVE_MODE_TOUCH);
-        mdVrLibrary.setAntiDistortionEnabled(false);
-    }
-
     private void initMediaInformation() {
         // Init media variables
         livePlaying = false;
@@ -202,8 +205,7 @@ public class ExoMediaPlayerAdapter implements IMediaPlayer {
             switch (displayMode) {
                 case MONO:
                     mdVrDisplayMode = MDVRLibrary.DISPLAY_MODE_NORMAL;
-                    mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_TOUCH;
-                    needAntiDistort = false;
+                    mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION_WITH_TOUCH;
                     break;
                 case STEREO:
                     mdVrDisplayMode = MDVRLibrary.DISPLAY_MODE_GLASS;
@@ -223,7 +225,7 @@ public class ExoMediaPlayerAdapter implements IMediaPlayer {
             int mdVrInteractiveMode = 0;
             switch (interactiveMode) {
                 case TOUCH:
-                    mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_TOUCH;
+                    mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION_WITH_TOUCH;
                     break;
                 case MOTION:
                     mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION;

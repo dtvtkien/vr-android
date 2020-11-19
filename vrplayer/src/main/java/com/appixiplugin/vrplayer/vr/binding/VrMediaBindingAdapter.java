@@ -44,7 +44,9 @@ public class VrMediaBindingAdapter {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                if (iMediaPlayer != null) {
+                    iMediaPlayer.seekEnded();
+                }
             }
         });
     }
