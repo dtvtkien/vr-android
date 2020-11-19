@@ -1,0 +1,175 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.appixi.vrplugin",
+    "module": "androidvr",
+    "version": "1.0.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "r3gvjmne2zapff5rgcqquippyq"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "4.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "4.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-adapters",
+          "version": {
+            "requires": "4.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "androidvr-1.0.2.aar",
+          "url": "androidvr-1.0.2.aar",
+          "size": 90075,
+          "sha512": "be45bc5fef2edd6805b4b677cf9f15951d66520faa61e79c39a1ed023ba7403d42115f529177ac97a26a5344b01061c4f1aa028fb07fd1d23faf8291a2ca846f",
+          "sha256": "1d4f9cd7b76ff6be4ded60244792dc2ebea6a28cf83f815861b44dddb1ca66cc",
+          "sha1": "afecf8d3bc1c0773c67c376946441ab1202fcbdc",
+          "md5": "ac0625f602514b062f59f8f19cfa73df"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.2.1"
+          }
+        },
+        {
+          "group": "androidx.constraintlayout",
+          "module": "constraintlayout",
+          "version": {
+            "requires": "2.0.4"
+          }
+        },
+        {
+          "group": "com.google.android.exoplayer",
+          "module": "exoplayer",
+          "version": {
+            "requires": "2.11.4"
+          }
+        },
+        {
+          "group": "com.github.bumptech.glide",
+          "module": "glide",
+          "version": {
+            "requires": "4.11.0"
+          }
+        },
+        {
+          "group": "com.github.ashqal",
+          "module": "MD360Player4Android",
+          "version": {
+            "requires": "2.5.0"
+          }
+        },
+        {
+          "group": "com.jakewharton.rxbinding4",
+          "module": "rxbinding",
+          "version": {
+            "requires": "4.0.0"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava3",
+          "module": "rxandroid",
+          "version": {
+            "requires": "3.0.0"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava3",
+          "module": "rxjava",
+          "version": {
+            "requires": "3.0.0"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.6"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "4.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "4.1.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-adapters",
+          "version": {
+            "requires": "4.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "androidvr-1.0.2.aar",
+          "url": "androidvr-1.0.2.aar",
+          "size": 90075,
+          "sha512": "be45bc5fef2edd6805b4b677cf9f15951d66520faa61e79c39a1ed023ba7403d42115f529177ac97a26a5344b01061c4f1aa028fb07fd1d23faf8291a2ca846f",
+          "sha256": "1d4f9cd7b76ff6be4ded60244792dc2ebea6a28cf83f815861b44dddb1ca66cc",
+          "sha1": "afecf8d3bc1c0773c67c376946441ab1202fcbdc",
+          "md5": "ac0625f602514b062f59f8f19cfa73df"
+        }
+      ]
+    }
+  ]
+}

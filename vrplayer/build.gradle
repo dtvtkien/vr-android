@@ -7,7 +7,7 @@ plugins {
 publish {
     def libraryGroupId = 'com.appixi.vrplugin'
     def libraryArtifactId = 'androidvr'
-    def libraryVersion = '1.0.1'
+    def libraryVersion = '1.0.2'
 
     afterEvaluate {
         publishing {

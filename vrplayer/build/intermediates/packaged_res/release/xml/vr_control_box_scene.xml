@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@id/end"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="800"
+        motion:motionInterpolator="easeInOut">
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:rotation="-15"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                motion:framePosition="50"
+                motion:motionTarget="@id/constraint_control" />
+
+            <KeyPosition
+                motion:framePosition="50"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@id/constraint_control"
+                motion:percentY="0.2" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/seek_bar_progress_media"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_spacing"
+            android:layout_marginTop="@dimen/medium_spacing"
+            android:layout_marginEnd="@dimen/medium_spacing"
+            android:paddingStart="@dimen/tiny_spacing"
+            android:paddingEnd="@dimen/tiny_spacing"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/constraint_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_spacing"
+            android:layout_marginTop="@dimen/medium_spacing"
+            android:layout_marginEnd="@dimen/medium_spacing"
+            android:layout_marginBottom="@dimen/medium_spacing"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/tv_start_controller" />
+
+        <Constraint
+            android:id="@+id/tv_start_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_spacing"
+            android:layout_marginTop="@dimen/tiny_spacing"
+            motion:layout_constraintEnd_toStartOf="@id/tv_end_controller"
+            motion:layout_constraintHorizontal_bias="0.0"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/seek_bar_progress_media" />
+
+        <Constraint
+            android:id="@+id/tv_end_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tiny_spacing"
+            android:layout_marginEnd="@dimen/medium_spacing"
+            motion:layout_constraintBottom_toBottomOf="@id/tv_start_controller"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/seek_bar_progress_media" />
+
+        <Constraint
+            android:id="@+id/img_vr_mode"
+            android:layout_width="@dimen/xx_medium_spacing"
+            android:layout_height="@dimen/xx_medium_spacing"
+            android:layout_marginEnd="@dimen/medium_spacing"
+            motion:layout_constraintBottom_toBottomOf="@id/constraint_control"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/constraint_control" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/seek_bar_progress_media"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tiny_spacing"
+            android:layout_marginEnd="@dimen/tiny_spacing"
+            android:paddingStart="@dimen/tiny_spacing"
+            android:paddingEnd="@dimen/tiny_spacing"
+            motion:layout_constraintEnd_toStartOf="@id/tv_end_controller"
+            motion:layout_constraintStart_toEndOf="@id/tv_start_controller"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/constraint_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_spacing"
+            android:layout_marginTop="@dimen/medium_spacing"
+            android:layout_marginEnd="@dimen/medium_spacing"
+            android:layout_marginBottom="@dimen/medium_spacing"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/tv_start_controller"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/tv_start_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/seek_bar_progress_media"
+            motion:layout_constraintStart_toEndOf="@id/constraint_control"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/tv_end_controller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tiny_spacing"
+            android:layout_marginEnd="@dimen/medium_spacing"
+            motion:layout_constraintBottom_toBottomOf="@id/tv_start_controller"
+            motion:layout_constraintEnd_toStartOf="@id/img_vr_mode"
+            motion:layout_constraintStart_toEndOf="@id/seek_bar_progress_media"
+            motion:layout_constraintTop_toTopOf="@id/tv_start_controller" />
+
+        <Constraint
+            android:id="@+id/img_vr_mode"
+            android:layout_width="@dimen/xx_medium_spacing"
+            android:layout_height="@dimen/xx_medium_spacing"
+            android:layout_marginEnd="@dimen/medium_spacing"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/tv_end_controller" />
+    </ConstraintSet>
+</MotionScene>
