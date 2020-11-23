@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/VR_Android_Plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/VR_Android_Plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/VR_Android_Plugin.demo.iml" filepath="$PROJECT_DIR$/.idea/modules/app/VR_Android_Plugin.demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/md360player/VR_Android_Plugin.md360player.iml" filepath="$PROJECT_DIR$/.idea/modules/md360player/VR_Android_Plugin.md360player.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vrlib/VR_Android_Plugin.vrlib.iml" filepath="$PROJECT_DIR$/.idea/modules/vrlib/VR_Android_Plugin.vrlib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/vrplayer/VR_Android_Plugin.vrplayer.iml" filepath="$PROJECT_DIR$/.idea/modules/vrplayer/VR_Android_Plugin.vrplayer.iml" />
     </modules>
   </component>

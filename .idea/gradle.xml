@@ -13,6 +13,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/demo" />
+            <option value="$PROJECT_DIR$/md360player" />
+            <option value="$PROJECT_DIR$/vrlib" />
             <option value="$PROJECT_DIR$/vrplayer" />
           </set>
         </option>

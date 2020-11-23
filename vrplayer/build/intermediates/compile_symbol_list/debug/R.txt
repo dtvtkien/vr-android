@@ -2306,6 +2306,7 @@ int string fab_transformation_scrim_behavior 0x0
 int string fab_transformation_sheet_behavior 0x0
 int string hide_bottom_view_on_scroll_behavior 0x0
 int string icon_content_description 0x0
+int string ijkplayer_dummy 0x0
 int string invalid_progressive_playback 0x0
 int string item_view_role_description 0x0
 int string material_slider_range_end 0x0

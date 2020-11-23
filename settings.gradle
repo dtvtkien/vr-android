@@ -1,3 +1,5 @@
+include ':md360player'
+include ':vrlib'
 include ':vrplayer'
 include ':demo'
 rootProject.name = "VR Android Plugin"
