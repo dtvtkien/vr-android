@@ -10,6 +10,8 @@ com/appixiplugin/vrplayer/vr/VrPlayerView.java
  com.appixiplugin.vrplayer.vr.VrPlayerView
  com.appixiplugin.vrplayer.vr.VrPlayerView$1
  com.appixiplugin.vrplayer.vr.VrPlayerView$2
+com/appixiplugin/vrplayer/vr/filter/VrMonoDirectorFilter.java
+ com.appixiplugin.vrplayer.vr.filter.VrMonoDirectorFilter
 com/appixiplugin/vrplayer/utils/DurationUtils.java
  com.appixiplugin.vrplayer.utils.DurationUtils
 com/appixiplugin/vrplayer/vr/ExoMediaPlayerAdapter.java
@@ -44,3 +46,5 @@ com/appixiplugin/vrplayer/presentation/VrPlayerActivity.java
 com/appixiplugin/vrplayer/vr/binding/VrMediaBindingAdapter.java
  com.appixiplugin.vrplayer.vr.binding.VrMediaBindingAdapter
  com.appixiplugin.vrplayer.vr.binding.VrMediaBindingAdapter$1
+com/appixiplugin/vrplayer/vr/filter/VrStereoDirectorFilter.java
+ com.appixiplugin.vrplayer.vr.filter.VrStereoDirectorFilter

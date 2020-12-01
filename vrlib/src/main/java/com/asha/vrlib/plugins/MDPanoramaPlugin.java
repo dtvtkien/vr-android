@@ -1,6 +1,7 @@
 package com.asha.vrlib.plugins;
 
 import android.content.Context;
+import android.opengl.GLES20;
 
 import com.asha.vrlib.MDDirectorCamUpdate;
 import com.asha.vrlib.MD360Director;

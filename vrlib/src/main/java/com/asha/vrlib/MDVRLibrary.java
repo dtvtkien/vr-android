@@ -82,11 +82,19 @@ public class MDVRLibrary {
     public static final int PROJECTION_MODE_STEREO_SPHERE_HORIZONTAL = 212;
     public static final int PROJECTION_MODE_STEREO_SPHERE_VERTICAL = 213;
     public static final int PROJECTION_MODE_CUBE = 214;
+    public static final int PROJECTION_MODE_HEMISPHERE = 215;
+    public static final int PROJECTION_MODE_STEREO_HEMISPHERE = 216;
+
+    // video type
+    public static final int VIDEO_TYPE_180_SIDE_BY_SIDE = 301;
+    public static final int VIDEO_TYPE_360_TOP_BOTTOM = 302;
+    public static final int VIDEO_TYPE_360_OVER_UNDER = 303;
 
     private RectF mTextureSize = new RectF(0, 0, 1024, 1024);
     private InteractiveModeManager mInteractiveModeManager;
     private DisplayModeManager mDisplayModeManager;
     private ProjectionModeManager mProjectionModeManager;
+    private int mVideoType;
     private MDPluginManager mPluginManager;
     private MDPickerManager mPickerManager;
     private MDGLScreenWrapper mScreenWrapper;
@@ -204,6 +212,9 @@ public class MDVRLibrary {
         mDisplayModeManager.setAntiDistortionEnabled(builder.barrelDistortionConfig.isDefaultEnabled());
         mDisplayModeManager.prepare(builder.context, builder.notSupportCallback);
 
+        // init VideoType
+        mVideoType = builder.videoType;
+
         // init InteractiveModeManager
         InteractiveModeManager.Params interactiveManagerParams = new InteractiveModeManager.Params();
         interactiveManagerParams.projectionModeManager = mProjectionModeManager;
@@ -241,6 +252,7 @@ public class MDVRLibrary {
                     .setPluginManager(mPluginManager)
                     .setProjectionModeManager(mProjectionModeManager)
                     .setDisplayModeManager(mDisplayModeManager)
+                    .setVideoType(mVideoType)
                     .build();
 
             // Set the renderer to our demo renderer, defined below.
@@ -495,6 +507,10 @@ public class MDVRLibrary {
         return mProjectionModeManager.getMode();
     }
 
+    public ProjectionModeManager getProjection(){
+        return mProjectionModeManager;
+    }
+
     public void notifyPlayerChanged(){
         if (mTexture != null){
             mTexture.notifyChanged();
@@ -594,6 +610,7 @@ public class MDVRLibrary {
         private int displayMode = DISPLAY_MODE_NORMAL;
         private int interactiveMode = INTERACTIVE_MODE_MOTION;
         private int projectionMode = PROJECTION_MODE_SPHERE;
+        private int videoType = VIDEO_TYPE_360_OVER_UNDER;
         private Context context;
         private int contentType = ContentType.DEFAULT;
         private MD360Texture texture;
@@ -631,6 +648,11 @@ public class MDVRLibrary {
 
         public Builder projectionMode(int projectionMode){
             this.projectionMode = projectionMode;
+            return this;
+        }
+
+        public Builder videoType(int videoType){
+            this.videoType = videoType;
             return this;
         }
 

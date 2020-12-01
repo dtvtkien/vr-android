@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
@@ -17,12 +18,18 @@ import androidx.annotation.StyleRes;
 
 import com.appixiplugin.vrplayer.vr.callback.MediaControllerCallback;
 import com.appixiplugin.vrplayer.vr.callback.MediaPlayerStateChanged;
+import com.appixiplugin.vrplayer.vr.filter.VrMonoDirectorFilter;
 import com.appixiplugin.vrplayer.vr.plate.MediaConstants;
 import com.asha.vrlib.MD360Director;
 import com.asha.vrlib.MD360DirectorFactory;
 import com.asha.vrlib.MDVRLibrary;
 import com.asha.vrlib.model.BarrelDistortionConfig;
 import com.asha.vrlib.model.MDPinchConfig;
+import com.asha.vrlib.model.MDPosition;
+import com.asha.vrlib.model.MDViewBuilder;
+import com.asha.vrlib.plugins.MDWidgetPlugin;
+import com.asha.vrlib.plugins.hotspot.MDAbsView;
+import com.asha.vrlib.plugins.hotspot.MDView;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
 import java.util.concurrent.TimeUnit;
@@ -215,9 +222,7 @@ public class VrPlayerView extends FrameLayout {
 
     private void prepareVrLibrary() {
         vrLibrary = MDVRLibrary.with(getContext())
-                .projectionMode(MDVRLibrary.PROJECTION_MODE_SPHERE)
-                .pinchConfig(new MDPinchConfig().setDefaultValue(0.7f).setMin(0.5f))
-                .pinchEnabled(true)
+                .pinchEnabled(false)
                 .barrelDistortionConfig(new BarrelDistortionConfig().setParamA(-0.036).setParamB(0.36))
                 .directorFactory(new MD360DirectorFactory() {
                     @Override

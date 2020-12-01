@@ -2,6 +2,7 @@ package com.asha.vrlib;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;
+import android.util.Log;
 
 import com.asha.vrlib.common.VRUtil;
 import com.asha.vrlib.model.MDPosition;
@@ -43,9 +44,16 @@ public class MD360Director {
 
     private boolean mWorldRotationMatrixInvalidate = true;
 
+    private Builder builder;
+
     protected MD360Director(Builder builder) {
+        this.builder = builder;
         this.mCamera = builder.mCamera;
         initModel();
+    }
+
+    public Builder getBuilder() {
+        return builder;
     }
 
     public float getDeltaY() {

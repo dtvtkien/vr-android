@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.appixiplugin.vrplayer.vr.callback.MediaPlayerStateChanged;
+import com.appixiplugin.vrplayer.vr.filter.VrMonoDirectorFilter;
+import com.appixiplugin.vrplayer.vr.filter.VrStereoDirectorFilter;
 import com.appixiplugin.vrplayer.vr.plate.IMediaPlayer;
 import com.appixiplugin.vrplayer.vr.plate.MediaConstants;
 import com.asha.vrlib.MDVRLibrary;
@@ -199,22 +201,30 @@ public class ExoMediaPlayerAdapter implements IMediaPlayer {
         displayModeSubject = BehaviorSubject.create();
         displayModeSubject.onNext(MediaConstants.DisplayMode.MONO);
         mediaCompositeDisposable.add(displayModeSubject.subscribe(displayMode -> {
+            int mdVrProjectionMode = 0;
             int mdVrDisplayMode = 0;
             int mdVrInteractiveMode = 0;
+            MDVRLibrary.IDirectorFilter directorFilter = null;
             boolean needAntiDistort = false;
             switch (displayMode) {
                 case MONO:
+                    mdVrProjectionMode = MDVRLibrary.PROJECTION_MODE_HEMISPHERE;
                     mdVrDisplayMode = MDVRLibrary.DISPLAY_MODE_NORMAL;
-                    mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION_WITH_TOUCH;
+                    mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_TOUCH;
+                    directorFilter = new VrMonoDirectorFilter();
                     break;
                 case STEREO:
+                    mdVrProjectionMode = MDVRLibrary.PROJECTION_MODE_STEREO_HEMISPHERE;
                     mdVrDisplayMode = MDVRLibrary.DISPLAY_MODE_GLASS;
                     mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION;
+                    directorFilter = new VrStereoDirectorFilter();
                     needAntiDistort = true;
                     break;
             }
+            mdVrLibrary.switchProjectionMode(context, mdVrProjectionMode);
             mdVrLibrary.switchDisplayMode(context, mdVrDisplayMode);
             mdVrLibrary.switchInteractiveMode(context, mdVrInteractiveMode);
+            mdVrLibrary.setDirectorFilter(directorFilter);
             mdVrLibrary.setAntiDistortionEnabled(needAntiDistort);
             mdVrLibrary.onResume(context);
         }));
@@ -225,7 +235,7 @@ public class ExoMediaPlayerAdapter implements IMediaPlayer {
             int mdVrInteractiveMode = 0;
             switch (interactiveMode) {
                 case TOUCH:
-                    mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION_WITH_TOUCH;
+                    mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_TOUCH;
                     break;
                 case MOTION:
                     mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION;
@@ -280,7 +290,6 @@ public class ExoMediaPlayerAdapter implements IMediaPlayer {
 
         @Override
         public void onLoadingChanged(boolean isLoading) {
-            Log.d(TAG, "onLoadingChanged: " + isLoading);
         }
 
         @Override
