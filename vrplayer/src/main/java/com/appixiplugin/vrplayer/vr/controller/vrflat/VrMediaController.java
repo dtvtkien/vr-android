@@ -1,10 +1,9 @@
-package com.appixiplugin.vrplayer.vr;
+package com.appixiplugin.vrplayer.vr.controller.vrflat;
 
 import android.content.Context;
 import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -14,10 +13,11 @@ import androidx.databinding.DataBindingUtil;
 import com.appixiplugin.vrplayer.R;
 import com.appixiplugin.vrplayer.databinding.VrMediaControllerBinding;
 import com.appixiplugin.vrplayer.utils.DurationUtils;
+import com.appixiplugin.vrplayer.vr.controller.IMediaController;
 import com.appixiplugin.vrplayer.vr.plate.IMediaPlayer;
 import com.appixiplugin.vrplayer.vr.plate.MediaConstants;
 
-class VrMediaController extends FrameLayout {
+public class VrMediaController extends FrameLayout implements IMediaController {
     private static final String TAG = VrMediaController.class.getCanonicalName();
     private static final int DEFAULT_MAX_VIDEO_PROGRESS = 1000;
     // Binding view
@@ -99,10 +99,12 @@ class VrMediaController extends FrameLayout {
         }
     }
 
+    @Override
     public void changedPlayState(boolean isPlaying) {
         binding.imgPlayPause.setImageResource(isPlaying ? R.drawable.ic_pause : R.drawable.ic_play);
     }
 
+    @Override
     public void changedProgress(long currentPosition, long duration) {
         int percent = (int) ((currentPosition * 1.0 / duration) * DEFAULT_MAX_VIDEO_PROGRESS);
         String positionString = DurationUtils.convertMilliseconds(currentPosition);

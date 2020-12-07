@@ -3,13 +3,15 @@ package com.appixiplugin.vrplayer.vr;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
@@ -18,20 +20,21 @@ import androidx.annotation.StyleRes;
 
 import com.appixiplugin.vrplayer.vr.callback.MediaControllerCallback;
 import com.appixiplugin.vrplayer.vr.callback.MediaPlayerStateChanged;
-import com.appixiplugin.vrplayer.vr.filter.VrMonoDirectorFilter;
+import com.appixiplugin.vrplayer.vr.controller.vr3d.Vr3DMediaController;
+import com.appixiplugin.vrplayer.vr.controller.vrflat.VrMediaController;
 import com.appixiplugin.vrplayer.vr.plate.MediaConstants;
 import com.asha.vrlib.MD360Director;
 import com.asha.vrlib.MD360DirectorFactory;
 import com.asha.vrlib.MDVRLibrary;
 import com.asha.vrlib.model.BarrelDistortionConfig;
-import com.asha.vrlib.model.MDPinchConfig;
+import com.asha.vrlib.model.MDHotspotBuilder;
 import com.asha.vrlib.model.MDPosition;
-import com.asha.vrlib.model.MDViewBuilder;
 import com.asha.vrlib.plugins.MDWidgetPlugin;
-import com.asha.vrlib.plugins.hotspot.MDAbsView;
-import com.asha.vrlib.plugins.hotspot.MDView;
+import com.asha.vrlib.plugins.hotspot.IMDHotspot;
+import com.asha.vrlib.texture.MD360BitmapTexture;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
+import java.io.FileNotFoundException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -223,6 +226,7 @@ public class VrPlayerView extends FrameLayout {
     private void prepareVrLibrary() {
         vrLibrary = MDVRLibrary.with(getContext())
                 .pinchEnabled(false)
+                .eyePickEnabled(true)
                 .barrelDistortionConfig(new BarrelDistortionConfig().setParamA(-0.036).setParamB(0.36))
                 .directorFactory(new MD360DirectorFactory() {
                     @Override
@@ -238,5 +242,11 @@ public class VrPlayerView extends FrameLayout {
                             .subscribe(surface1 -> exoPlayer.setVideoSurface(surface1)));
                 })
                 .build(glSurfaceView);
+        prepare3DMediaController();
+    }
+
+    private void prepare3DMediaController() {
+        Vr3DMediaController mediaController = new Vr3DMediaController(vrLibrary);
+        mediaController.initializeController(getContext());
     }
 }

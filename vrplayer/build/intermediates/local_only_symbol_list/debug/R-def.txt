@@ -28,6 +28,11 @@ drawable ic_play
 drawable ic_rewind_30s
 drawable ic_settings
 drawable ic_volume
+drawable ic_vr_focus
+drawable ic_vr_next
+drawable ic_vr_pause
+drawable ic_vr_play
+drawable ic_vr_previous
 id constraint_control
 id constraint_layout_media_controller
 id constraint_volume

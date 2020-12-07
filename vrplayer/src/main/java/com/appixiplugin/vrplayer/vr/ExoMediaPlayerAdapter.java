@@ -217,7 +217,6 @@ public class ExoMediaPlayerAdapter implements IMediaPlayer {
                     mdVrProjectionMode = MDVRLibrary.PROJECTION_MODE_STEREO_HEMISPHERE;
                     mdVrDisplayMode = MDVRLibrary.DISPLAY_MODE_GLASS;
                     mdVrInteractiveMode = MDVRLibrary.INTERACTIVE_MODE_CARDBORAD_MOTION;
-                    directorFilter = new VrStereoDirectorFilter();
                     needAntiDistort = true;
                     break;
             }
