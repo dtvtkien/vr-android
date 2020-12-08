@@ -3,9 +3,6 @@ package com.appixiplugin.vrplayer.vr;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -27,14 +24,8 @@ import com.asha.vrlib.MD360Director;
 import com.asha.vrlib.MD360DirectorFactory;
 import com.asha.vrlib.MDVRLibrary;
 import com.asha.vrlib.model.BarrelDistortionConfig;
-import com.asha.vrlib.model.MDHotspotBuilder;
-import com.asha.vrlib.model.MDPosition;
-import com.asha.vrlib.plugins.MDWidgetPlugin;
-import com.asha.vrlib.plugins.hotspot.IMDHotspot;
-import com.asha.vrlib.texture.MD360BitmapTexture;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
-import java.io.FileNotFoundException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -53,6 +44,7 @@ public class VrPlayerView extends FrameLayout {
     // Custom media controller & video surface view
     private SurfaceView glSurfaceView;
     private VrMediaController vrMediaController;
+    private Vr3DMediaController vr3DMediaController;
 
     // Media player -> Using ExoPlayer2 with an adapter to adapt with [IMediaController]
     private SimpleExoPlayer exoPlayer;
@@ -201,11 +193,13 @@ public class VrPlayerView extends FrameLayout {
                     @Override
                     public void onPlayControlChanged(boolean isPlaying) {
                         vrMediaController.changedPlayState(isPlaying);
+                        vr3DMediaController.changedPlayState(isPlaying);
                     }
 
                     @Override
                     public void onProgressChanged(long currentPosition, long duration) {
                         vrMediaController.changedProgress(currentPosition, duration);
+                        vr3DMediaController.changedProgress(currentPosition, duration);
                     }
                 });
         vrMediaController.setMediaPlayer(vrPlayerAdapter);
@@ -246,7 +240,7 @@ public class VrPlayerView extends FrameLayout {
     }
 
     private void prepare3DMediaController() {
-        Vr3DMediaController mediaController = new Vr3DMediaController(vrLibrary);
-        mediaController.initializeController(getContext());
+        vr3DMediaController = new Vr3DMediaController(vrLibrary);
+        vr3DMediaController.initializeController(getContext());
     }
 }

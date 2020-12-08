@@ -1649,11 +1649,13 @@ drawable ic_play
 drawable ic_rewind_30s
 drawable ic_settings
 drawable ic_volume
+drawable ic_vr_fast_forward_30
 drawable ic_vr_focus
-drawable ic_vr_next
 drawable ic_vr_pause
 drawable ic_vr_play
-drawable ic_vr_previous
+drawable ic_vr_rewind_30
+drawable ic_vr_skip_next
+drawable ic_vr_skip_previous
 drawable material_ic_calendar_black_24dp
 drawable material_ic_clear_black_24dp
 drawable material_ic_edit_black_24dp

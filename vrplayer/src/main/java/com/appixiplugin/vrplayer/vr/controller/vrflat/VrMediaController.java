@@ -19,7 +19,6 @@ import com.appixiplugin.vrplayer.vr.plate.MediaConstants;
 
 public class VrMediaController extends FrameLayout implements IMediaController {
     private static final String TAG = VrMediaController.class.getCanonicalName();
-    private static final int DEFAULT_MAX_VIDEO_PROGRESS = 1000;
     // Binding view
     private VrMediaControllerBinding binding;
 
@@ -50,6 +49,11 @@ public class VrMediaController extends FrameLayout implements IMediaController {
         binding.imgPlayPause.setImageResource(R.drawable.ic_play);
         binding.tvStartController.setText(DurationUtils.convertMilliseconds(0));
         binding.tvEndController.setText(DurationUtils.convertMilliseconds(0));
+        // Animation to other layout if orientation is not portrait
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding.motionLayoutControlBox.transitionToEnd();
+        }
     }
 
     @Override

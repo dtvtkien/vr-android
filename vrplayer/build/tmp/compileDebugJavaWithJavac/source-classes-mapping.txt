@@ -1,7 +1,5 @@
 com/appixiplugin/vrplayer/vr/callback/MediaPlayerStateChanged.java
  com.appixiplugin.vrplayer.vr.callback.MediaPlayerStateChanged
-com/appixiplugin/vrplayer/vr/controller/vr3d/Vr3DAssetProvider.java
- com.appixiplugin.vrplayer.vr.controller.vr3d.Vr3DAssetProvider
 com/appixiplugin/vrplayer/vr/filter/VrMonoDirectorFilter.java
  com.appixiplugin.vrplayer.vr.filter.VrMonoDirectorFilter
 com/appixiplugin/vrplayer/vr/controller/vrflat/VrMediaController.java
@@ -62,5 +60,8 @@ com/appixiplugin/vrplayer/presentation/VrPlayerActivity.java
  com.appixiplugin.vrplayer.presentation.VrPlayerActivity
  com.appixiplugin.vrplayer.presentation.VrPlayerActivity$1
  com.appixiplugin.vrplayer.presentation.VrPlayerActivity$2
+com/appixiplugin/vrplayer/vr/controller/vr3d/Vr3DImageProvider.java
+ com.appixiplugin.vrplayer.vr.controller.vr3d.Vr3DImageProvider
+ com.appixiplugin.vrplayer.vr.controller.vr3d.Vr3DImageProvider$1
 com/appixiplugin/vrplayer/vr/filter/VrStereoDirectorFilter.java
  com.appixiplugin.vrplayer.vr.filter.VrStereoDirectorFilter

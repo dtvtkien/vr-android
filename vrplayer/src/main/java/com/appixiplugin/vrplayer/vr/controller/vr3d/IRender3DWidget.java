@@ -15,7 +15,7 @@ public interface IRender3DWidget extends IRender3DView {
     int getAssetStateFocused();
 
     default MDHotspotBuilder create3DViewBuilder(Context context) {
-        return MDHotspotBuilder.create(new Vr3DAssetProvider(context))
+        return MDHotspotBuilder.create(new Vr3DImageProvider(context))
                 .size(getWidth3D(), getHeight3D())
                 .provider(DEFAULT_KEY_NORMAL_STATUS, context, getAssetStateNormal())
                 .provider(DEFAULT_KEY_FOCUSED_STATUS, context, getAssetStateFocused())

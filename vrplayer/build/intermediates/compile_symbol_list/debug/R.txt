@@ -1648,11 +1648,13 @@ int drawable ic_play 0x0
 int drawable ic_rewind_30s 0x0
 int drawable ic_settings 0x0
 int drawable ic_volume 0x0
+int drawable ic_vr_fast_forward_30 0x0
 int drawable ic_vr_focus 0x0
-int drawable ic_vr_next 0x0
 int drawable ic_vr_pause 0x0
 int drawable ic_vr_play 0x0
-int drawable ic_vr_previous 0x0
+int drawable ic_vr_rewind_30 0x0
+int drawable ic_vr_skip_next 0x0
+int drawable ic_vr_skip_previous 0x0
 int drawable material_ic_calendar_black_24dp 0x0
 int drawable material_ic_clear_black_24dp 0x0
 int drawable material_ic_edit_black_24dp 0x0
