@@ -6,4 +6,6 @@ public interface IMediaController {
     void changedPlayState(boolean isPlaying);
 
     void changedProgress(long currentPosition, long duration);
+
+    void changedVisibility(boolean visible);
 }

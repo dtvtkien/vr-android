@@ -182,6 +182,13 @@ public class ExoMediaPlayerAdapter implements IMediaPlayer {
         return liveDuration;
     }
 
+    @Override
+    public void focusChanged(boolean needShow) {
+        if (callback != null) {
+            callback.onFocusChanged(needShow);
+        }
+    }
+
     private void setupExoPlayer() {
         exoPlayer.addListener(new ExoPlayerListener());
         MediaSource mediaSource = buildMediaSource(videoLink);

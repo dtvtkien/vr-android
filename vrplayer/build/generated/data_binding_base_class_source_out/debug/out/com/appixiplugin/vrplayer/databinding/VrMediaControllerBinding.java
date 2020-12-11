@@ -16,6 +16,7 @@ import androidx.databinding.Bindable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import com.appixiplugin.vrplayer.R;
+import com.appixiplugin.vrplayer.custom.CircleProgressBar;
 import com.appixiplugin.vrplayer.vr.plate.IMediaPlayer;
 import java.lang.Deprecated;
 import java.lang.Object;
@@ -31,7 +32,16 @@ public abstract class VrMediaControllerBinding extends ViewDataBinding {
   public final ConstraintLayout constraintVolume;
 
   @NonNull
+  public final CircleProgressBar cpLeftEye;
+
+  @NonNull
+  public final CircleProgressBar cpRightEye;
+
+  @NonNull
   public final Guideline guideline;
+
+  @NonNull
+  public final Guideline guideline2;
 
   @NonNull
   public final AppCompatImageView imgClose;
@@ -69,22 +79,36 @@ public abstract class VrMediaControllerBinding extends ViewDataBinding {
   @NonNull
   public final AppCompatTextView tvStartController;
 
+  @NonNull
+  public final View view3dBlur;
+
+  @NonNull
+  public final View viewCenterLeftEye;
+
+  @NonNull
+  public final View viewCenterRightEye;
+
   @Bindable
   protected IMediaPlayer mMediaPlayer;
 
   protected VrMediaControllerBinding(Object _bindingComponent, View _root, int _localFieldCount,
       ConstraintLayout constraintControl, ConstraintLayout constraintLayoutMediaController,
-      ConstraintLayout constraintVolume, Guideline guideline, AppCompatImageView imgClose,
+      ConstraintLayout constraintVolume, CircleProgressBar cpLeftEye, CircleProgressBar cpRightEye,
+      Guideline guideline, Guideline guideline2, AppCompatImageView imgClose,
       AppCompatImageView imgFastForward, AppCompatImageView imgPlayPause,
       AppCompatImageView imgRewind, AppCompatImageView imgSettings, AppCompatImageView imgVolume,
       AppCompatImageView imgVrMode, MotionLayout motionLayoutControlBox,
       MotionLayout motionLayoutMediaController, AppCompatSeekBar seekBarProgressMedia,
-      AppCompatTextView tvEndController, AppCompatTextView tvStartController) {
+      AppCompatTextView tvEndController, AppCompatTextView tvStartController, View view3dBlur,
+      View viewCenterLeftEye, View viewCenterRightEye) {
     super(_bindingComponent, _root, _localFieldCount);
     this.constraintControl = constraintControl;
     this.constraintLayoutMediaController = constraintLayoutMediaController;
     this.constraintVolume = constraintVolume;
+    this.cpLeftEye = cpLeftEye;
+    this.cpRightEye = cpRightEye;
     this.guideline = guideline;
+    this.guideline2 = guideline2;
     this.imgClose = imgClose;
     this.imgFastForward = imgFastForward;
     this.imgPlayPause = imgPlayPause;
@@ -97,6 +121,9 @@ public abstract class VrMediaControllerBinding extends ViewDataBinding {
     this.seekBarProgressMedia = seekBarProgressMedia;
     this.tvEndController = tvEndController;
     this.tvStartController = tvStartController;
+    this.view3dBlur = view3dBlur;
+    this.viewCenterLeftEye = viewCenterLeftEye;
+    this.viewCenterRightEye = viewCenterRightEye;
   }
 
   public abstract void setMediaPlayer(@Nullable IMediaPlayer mediaPlayer);

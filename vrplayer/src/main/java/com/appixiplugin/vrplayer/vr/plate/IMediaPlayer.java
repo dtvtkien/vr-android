@@ -57,4 +57,9 @@ public interface IMediaPlayer {
     long currentPosition();
 
     long duration();
+
+    /**
+     * Handle focus state changed in VR 3D mode
+     */
+    void focusChanged(boolean needShow);
 }

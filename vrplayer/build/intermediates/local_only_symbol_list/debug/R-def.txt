@@ -1,7 +1,14 @@
 R_DEF: Internal format may change without notice
 local
+attr? animatedDurationInSeconds
+attr? max
+attr? min
+attr? progress
+attr? progressBarThickness
+attr? progressbarColor
 color bg_media_controller
 color black
+color black_30
 color colorAccent
 color colorPrimary
 color colorPrimaryDark
@@ -38,8 +45,11 @@ drawable ic_vr_skip_previous
 id constraint_control
 id constraint_layout_media_controller
 id constraint_volume
+id cp_left_eye
+id cp_right_eye
 id end
 id guideline
+id guideline2
 id img_close
 id img_fast_forward
 id img_play_pause
@@ -56,6 +66,9 @@ id statusbarutil_fake_status_bar_view
 id statusbarutil_translucent_view
 id tv_end_controller
 id tv_start_controller
+id view_3d_blur
+id view_center_left_eye
+id view_center_right_eye
 layout activity_vr_player
 layout vr_media_controller
 string control_title
@@ -68,5 +81,6 @@ style AppTheme
 style MediaControllerTextTheme
 style SeekBarTheme
 style Theme.DemoVr180
+styleable CircleProgressBar min max progress progressbarColor progressBarThickness animatedDurationInSeconds
 xml vr_control_box_scene
 xml vr_media_controller_scene

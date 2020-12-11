@@ -14,4 +14,6 @@ public interface MediaPlayerStateChanged {
     void onPlayControlChanged(boolean isPlaying);
 
     void onProgressChanged(long currentPosition, long duration);
+
+    void onFocusChanged(boolean needShow);
 }

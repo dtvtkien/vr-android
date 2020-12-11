@@ -199,6 +199,74 @@
                     android:orientation="horizontal"
                     app:layout_constraintGuide_begin="@dimen/large_spacing" />
 
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <View
+                    android:id="@+id/view_3d_blur"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black_30"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <View
+                    android:id="@+id/view_center_left_eye"
+                    android:layout_width="@dimen/tiny_spacing"
+                    android:layout_height="@dimen/tiny_spacing"
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <View
+                    android:id="@+id/view_center_right_eye"
+                    android:layout_width="@dimen/tiny_spacing"
+                    android:layout_height="@dimen/tiny_spacing"
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <com.appixiplugin.vrplayer.custom.CircleProgressBar
+                    android:id="@+id/cp_left_eye"
+                    android:layout_width="@dimen/medium_spacing"
+                    android:layout_height="@dimen/medium_spacing"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:progressbarColor="@color/white"
+                    app:progressBarThickness="@dimen/tiny_spacing"
+                    tools:visibility="visible" />
+
+                <com.appixiplugin.vrplayer.custom.CircleProgressBar
+                    android:id="@+id/cp_right_eye"
+                    android:layout_width="@dimen/medium_spacing"
+                    android:layout_height="@dimen/medium_spacing"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:progressbarColor="@color/white"
+                    app:progressBarThickness="@dimen/tiny_spacing"
+                    tools:visibility="visible" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.motion.widget.MotionLayout>
     </merge>

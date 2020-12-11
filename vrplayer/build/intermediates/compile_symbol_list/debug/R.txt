@@ -90,6 +90,7 @@ int attr alpha 0x0
 int attr alphabeticModifiers 0x0
 int attr altSrc 0x0
 int attr animate_relativeTo 0x0
+int attr animatedDurationInSeconds 0x0
 int attr animationMode 0x0
 int attr appBarLayoutStyle 0x0
 int attr applyMotionScene 0x0
@@ -587,6 +588,7 @@ int attr materialCalendarStyle 0x0
 int attr materialCalendarTheme 0x0
 int attr materialCardViewStyle 0x0
 int attr materialThemeOverlay 0x0
+int attr max 0x0
 int attr maxAcceleration 0x0
 int attr maxActionInlineWidth 0x0
 int attr maxButtonHeight 0x0
@@ -598,6 +600,7 @@ int attr maxVelocity 0x0
 int attr maxWidth 0x0
 int attr measureWithLargestChild 0x0
 int attr menu 0x0
+int attr min 0x0
 int attr minHeight 0x0
 int attr minTouchTargetSize 0x0
 int attr minWidth 0x0
@@ -671,8 +674,11 @@ int attr prefixTextAppearance 0x0
 int attr prefixTextColor 0x0
 int attr preserveIconSpacing 0x0
 int attr pressedTranslationZ 0x0
+int attr progress 0x0
 int attr progressBarPadding 0x0
 int attr progressBarStyle 0x0
+int attr progressBarThickness 0x0
+int attr progressbarColor 0x0
 int attr queryBackground 0x0
 int attr queryHint 0x0
 int attr radioButtonStyle 0x0
@@ -957,6 +963,7 @@ int color background_material_dark 0x0
 int color background_material_light 0x0
 int color bg_media_controller 0x0
 int color black 0x0
+int color black_30 0x0
 int color bright_foreground_disabled_material_dark 0x0
 int color bright_foreground_disabled_material_light 0x0
 int color bright_foreground_inverse_material_dark 0x0
@@ -1788,6 +1795,8 @@ int id content 0x0
 int id contentPanel 0x0
 int id coordinator 0x0
 int id cos 0x0
+int id cp_left_eye 0x0
+int id cp_right_eye 0x0
 int id custom 0x0
 int id customPanel 0x0
 int id cut 0x0
@@ -1859,6 +1868,7 @@ int id glide_custom_view_target_tag 0x0
 int id gone 0x0
 int id group_divider 0x0
 int id guideline 0x0
+int id guideline2 0x0
 int id home 0x0
 int id honorRequest 0x0
 int id icon 0x0
@@ -2059,6 +2069,9 @@ int id uniform 0x0
 int id unlabeled 0x0
 int id up 0x0
 int id video_decoder_gl_surface_view 0x0
+int id view_3d_blur 0x0
+int id view_center_left_eye 0x0
+int id view_center_right_eye 0x0
 int id view_offset_helper 0x0
 int id visible 0x0
 int id when_playing 0x0
@@ -3440,6 +3453,13 @@ int styleable ChipGroup_chipSpacingVertical 3
 int styleable ChipGroup_selectionRequired 4
 int styleable ChipGroup_singleLine 5
 int styleable ChipGroup_singleSelection 6
+int[] styleable CircleProgressBar { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
+int styleable CircleProgressBar_animatedDurationInSeconds 0
+int styleable CircleProgressBar_max 1
+int styleable CircleProgressBar_min 2
+int styleable CircleProgressBar_progress 3
+int styleable CircleProgressBar_progressBarThickness 4
+int styleable CircleProgressBar_progressbarColor 5
 int[] styleable CollapsingToolbarLayout { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 int styleable CollapsingToolbarLayout_collapsedTitleGravity 0
 int styleable CollapsingToolbarLayout_collapsedTitleTextAppearance 1

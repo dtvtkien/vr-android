@@ -91,6 +91,7 @@ attr alpha
 attr alphabeticModifiers
 attr altSrc
 attr animate_relativeTo
+attr animatedDurationInSeconds
 attr animationMode
 attr appBarLayoutStyle
 attr applyMotionScene
@@ -588,6 +589,7 @@ attr materialCalendarStyle
 attr materialCalendarTheme
 attr materialCardViewStyle
 attr materialThemeOverlay
+attr max
 attr maxAcceleration
 attr maxActionInlineWidth
 attr maxButtonHeight
@@ -599,6 +601,7 @@ attr maxVelocity
 attr maxWidth
 attr measureWithLargestChild
 attr menu
+attr min
 attr minHeight
 attr minTouchTargetSize
 attr minWidth
@@ -672,8 +675,11 @@ attr prefixTextAppearance
 attr prefixTextColor
 attr preserveIconSpacing
 attr pressedTranslationZ
+attr progress
 attr progressBarPadding
 attr progressBarStyle
+attr progressBarThickness
+attr progressbarColor
 attr queryBackground
 attr queryHint
 attr radioButtonStyle
@@ -958,6 +964,7 @@ color background_material_dark
 color background_material_light
 color bg_media_controller
 color black
+color black_30
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -1789,6 +1796,8 @@ id content
 id contentPanel
 id coordinator
 id cos
+id cp_left_eye
+id cp_right_eye
 id custom
 id customPanel
 id cut
@@ -1860,6 +1869,7 @@ id glide_custom_view_target_tag
 id gone
 id group_divider
 id guideline
+id guideline2
 id home
 id honorRequest
 id icon
@@ -2060,6 +2070,9 @@ id uniform
 id unlabeled
 id up
 id video_decoder_gl_surface_view
+id view_3d_blur
+id view_center_left_eye
+id view_center_right_eye
 id view_offset_helper
 id visible
 id when_playing
@@ -3101,6 +3114,7 @@ styleable ButtonBarLayout allowStacking
 styleable CardView android_minHeight android_minWidth cardBackgroundColor cardCornerRadius cardElevation cardMaxElevation cardPreventCornerOverlap cardUseCompatPadding contentPadding contentPaddingBottom contentPaddingLeft contentPaddingRight contentPaddingTop
 styleable Chip android_checkable android_ellipsize android_maxWidth android_text android_textAppearance android_textColor checkedIcon checkedIconEnabled checkedIconTint checkedIconVisible chipBackgroundColor chipCornerRadius chipEndPadding chipIcon chipIconEnabled chipIconSize chipIconTint chipIconVisible chipMinHeight chipMinTouchTargetSize chipStartPadding chipStrokeColor chipStrokeWidth chipSurfaceColor closeIcon closeIconEnabled closeIconEndPadding closeIconSize closeIconStartPadding closeIconTint closeIconVisible ensureMinTouchTargetSize hideMotionSpec iconEndPadding iconStartPadding rippleColor shapeAppearance shapeAppearanceOverlay showMotionSpec textEndPadding textStartPadding
 styleable ChipGroup checkedChip chipSpacing chipSpacingHorizontal chipSpacingVertical selectionRequired singleLine singleSelection
+styleable CircleProgressBar animatedDurationInSeconds max min progress progressBarThickness progressbarColor
 styleable CollapsingToolbarLayout collapsedTitleGravity collapsedTitleTextAppearance contentScrim expandedTitleGravity expandedTitleMargin expandedTitleMarginBottom expandedTitleMarginEnd expandedTitleMarginStart expandedTitleMarginTop expandedTitleTextAppearance maxLines scrimAnimationDuration scrimVisibleHeightTrigger statusBarScrim title titleEnabled toolbarId
 styleable CollapsingToolbarLayout_Layout layout_collapseMode layout_collapseParallaxMultiplier
 styleable ColorStateListItem alpha android_alpha android_color

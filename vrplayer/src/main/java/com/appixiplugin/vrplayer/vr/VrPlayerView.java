@@ -163,57 +163,20 @@ public class VrPlayerView extends FrameLayout {
     public void prepare(String path) {
         exoPlayer = new SimpleExoPlayer.Builder(getContext()).build();
         prepareVrLibrary();
-        vrPlayerAdapter = new ExoMediaPlayerAdapter(getContext(), path, vrLibrary, exoPlayer,
-                new MediaPlayerStateChanged() {
-                    @Override
-                    public void onMediaClosed() {
-                        if (mediaControllerCallback != null) {
-                            mediaControllerCallback.onClosePlayer();
-                        }
-                    }
-
-                    @Override
-                    public void onUserInteracting() {
-                        vrMediaController.show();
-                    }
-
-                    @Override
-                    public void onInteractiveEnded() {
-                        autoHideController();
-                    }
-
-                    @Override
-                    public void onDisplayModeChanged(MediaConstants.DisplayMode mode) {
-                        vrMediaController.changeMode(mode);
-                        if (mediaControllerCallback != null) {
-                            mediaControllerCallback.onChangedDisplayMode(mode);
-                        }
-                    }
-
-                    @Override
-                    public void onPlayControlChanged(boolean isPlaying) {
-                        vrMediaController.changedPlayState(isPlaying);
-                        vr3DMediaController.changedPlayState(isPlaying);
-                    }
-
-                    @Override
-                    public void onProgressChanged(long currentPosition, long duration) {
-                        vrMediaController.changedProgress(currentPosition, duration);
-                        vr3DMediaController.changedProgress(currentPosition, duration);
-                    }
-                });
-        vrMediaController.setMediaPlayer(vrPlayerAdapter);
+        prepareMediaPlayer(path);
+        prepareFlatMediaController();
+        prepare3DMediaController();
     }
 
     private void autoHideController() {
-        vrMediaController.show();
+        vrMediaController.changedVisibility(true);
         if (vrControllerDisposable != null) {
             vrViewCompositeDisposable.remove(vrControllerDisposable);
         }
         vrControllerDisposable = Observable.timer(3000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(delay -> vrMediaController.hide());
+                .subscribe(delay -> vrMediaController.changedVisibility(false));
         vrViewCompositeDisposable.add(vrControllerDisposable);
     }
 
@@ -236,11 +199,69 @@ public class VrPlayerView extends FrameLayout {
                             .subscribe(surface1 -> exoPlayer.setVideoSurface(surface1)));
                 })
                 .build(glSurfaceView);
-        prepare3DMediaController();
+    }
+
+    private void prepareMediaPlayer(String path) {
+        final MediaPlayerStateChanged mediaPlayerStateChanged = new MediaPlayerStateChanged() {
+            @Override
+            public void onMediaClosed() {
+                if (mediaControllerCallback != null) {
+                    mediaControllerCallback.onClosePlayer();
+                }
+            }
+
+            @Override
+            public void onUserInteracting() {
+                vrMediaController.changedPlayState(true);
+            }
+
+            @Override
+            public void onInteractiveEnded() {
+                autoHideController();
+            }
+
+            @Override
+            public void onDisplayModeChanged(MediaConstants.DisplayMode mode) {
+                vrMediaController.changeMode(mode);
+                if (mediaControllerCallback != null) {
+                    mediaControllerCallback.onChangedDisplayMode(mode);
+                }
+            }
+
+            @Override
+            public void onPlayControlChanged(boolean isPlaying) {
+                vrMediaController.changedPlayState(isPlaying);
+                vr3DMediaController.changedPlayState(isPlaying);
+            }
+
+            @Override
+            public void onProgressChanged(long currentPosition, long duration) {
+                float currentPitch = vrLibrary.getDirectorBrief().getPitch();
+                if (currentPitch < -30.0f) {
+                    vrMediaController.showHideCenterIcon(true);
+                    vr3DMediaController.changedVisibility(true);
+                } else if (currentPitch > -20.0f) {
+                    vrMediaController.showHideCenterIcon(false);
+                    vr3DMediaController.changedVisibility(false);
+                }
+                vrMediaController.changedProgress(currentPosition, duration);
+                vr3DMediaController.changedProgress(currentPosition, duration);
+            }
+
+            @Override
+            public void onFocusChanged(boolean needShow) {
+                vrMediaController.showHideFocusProgress(needShow);
+            }
+        };
+        vrPlayerAdapter = new ExoMediaPlayerAdapter(getContext(), path, vrLibrary, exoPlayer, mediaPlayerStateChanged);
+    }
+
+    private void prepareFlatMediaController() {
+        vrMediaController.setMediaPlayer(vrPlayerAdapter);
     }
 
     private void prepare3DMediaController() {
-        vr3DMediaController = new Vr3DMediaController(vrLibrary);
-        vr3DMediaController.initializeController(getContext());
+        vr3DMediaController = new Vr3DMediaController(getContext(), vrLibrary);
+        vr3DMediaController.setMediaPlayer(vrPlayerAdapter);
     }
 }
