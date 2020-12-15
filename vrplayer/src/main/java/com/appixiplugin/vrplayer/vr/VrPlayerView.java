@@ -223,6 +223,7 @@ public class VrPlayerView extends FrameLayout {
             @Override
             public void onDisplayModeChanged(MediaConstants.DisplayMode mode) {
                 vrMediaController.changeMode(mode);
+                vr3DMediaController.changedVisibility(false);
                 if (mediaControllerCallback != null) {
                     mediaControllerCallback.onChangedDisplayMode(mode);
                 }
@@ -237,15 +238,18 @@ public class VrPlayerView extends FrameLayout {
             @Override
             public void onProgressChanged(long currentPosition, long duration) {
                 float currentPitch = vrLibrary.getDirectorBrief().getPitch();
+                vrMediaController.changedProgress(currentPosition, duration);
+                vr3DMediaController.changedProgress(currentPosition, duration);
+                if (vrLibrary.getDisplayMode() != MDVRLibrary.DISPLAY_MODE_GLASS) {
+                    return;
+                }
                 if (currentPitch < -30.0f) {
                     vrMediaController.showHideCenterIcon(true);
                     vr3DMediaController.changedVisibility(true);
-                } else if (currentPitch > -20.0f) {
+                } else if (currentPitch > -16.0f) {
                     vrMediaController.showHideCenterIcon(false);
                     vr3DMediaController.changedVisibility(false);
                 }
-                vrMediaController.changedProgress(currentPosition, duration);
-                vr3DMediaController.changedProgress(currentPosition, duration);
             }
 
             @Override

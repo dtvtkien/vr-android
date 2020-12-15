@@ -3,8 +3,9 @@ package com.appixiplugin.vrplayer.vr.controller.vr3d;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -12,17 +13,16 @@ import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.appixiplugin.vrplayer.R;
+import com.appixiplugin.vrplayer.utils.DrawableUtils;
 import com.appixiplugin.vrplayer.utils.DurationUtils;
 import com.appixiplugin.vrplayer.vr.controller.IMediaController;
 import com.appixiplugin.vrplayer.vr.plate.IMediaPlayer;
 import com.asha.vrlib.MDVRLibrary;
 import com.asha.vrlib.model.MDHitPoint;
 import com.asha.vrlib.model.MDPosition;
-import com.asha.vrlib.model.MDViewBuilder;
 import com.asha.vrlib.plugins.hotspot.IMDHotspot;
 import com.asha.vrlib.plugins.hotspot.MDAbsHotspot;
 import com.asha.vrlib.plugins.hotspot.MDAbsView;
-import com.asha.vrlib.plugins.hotspot.MDView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,9 +35,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class Vr3DMediaController implements IMediaController {
     private static final String TAG = Vr3DMediaController.class.getCanonicalName();
-    private static final float CONTROLLER_YAW = -90.0f; // Flat on the floor
-    private static final float CONTROLLER_DISTANCE_TO_EYE = -14.0f; // Distance from controller to eyes
+    private static final float CONTROLLER_YAW = -10.0f; // Flat on the floor
+    private static final float CONTROLLER_DISTANCE_TO_EYE = -18.0f; // Distance from controller to eyes
     private static final int FOCUSED_CHECK_IN_SECONDS = 3;
+    private static final int FOCUSED_COLOR = 0x99333333;
+    private static final int UNFOCUSED_COLOR = 0x88908894;
 
     private MDVRLibrary mdvrLibrary;
     private Context context;
@@ -83,9 +85,12 @@ public class Vr3DMediaController implements IMediaController {
     public void changedPlayState(boolean isPlaying) {
         MDAbsView mdView = mdvrLibrary.findViewByTag(Vr3DViewType.play.tag);
         if (mdView != null) {
-            AppCompatImageView controlView = mdView.castAttachedView(AppCompatImageView.class);
-            controlView.setImageResource(isPlaying ? R.drawable.ic_vr_pause : R.drawable.ic_vr_play);
-            mdView.invalidate();
+            FrameLayout controlLayout = mdView.castAttachedView(FrameLayout.class);
+            if (controlLayout.getChildAt(0) instanceof AppCompatImageView) {
+                AppCompatImageView controlView = (AppCompatImageView) controlLayout.getChildAt(0);
+                controlView.setImageResource(isPlaying ? R.drawable.ic_vr_pause : R.drawable.ic_vr_play);
+                mdView.invalidate();
+            }
         }
     }
 
@@ -144,7 +149,6 @@ public class Vr3DMediaController implements IMediaController {
                 switch (viewType) {
                     case container:
                         View containerView = new View(context);
-//                        containerView.setBackgroundColor(0x88908894);
                         containerView.setBackgroundColor(0x00FFFFFF);
                         view3D = new Vr3DView(tag, position, containerView, width, height);
                         break;
@@ -152,28 +156,52 @@ public class Vr3DMediaController implements IMediaController {
                         AppCompatTextView titleVideoTextView = new AppCompatTextView(context);
                         titleVideoTextView.setText("1.1.舞台deVRバーチャルコンサート/体験動画");
                         titleVideoTextView.setTextColor(Color.WHITE);
+                        titleVideoTextView.setTextSize(10.0f);
                         view3D = new Vr3DView(tag, position, titleVideoTextView, width, height);
                         break;
                     case skipPrevious:
-                        view3D = new Vr3DWidget(tag, position,
-                                R.drawable.ic_vr_skip_previous, R.drawable.ic_vr_skip_previous, width, height);
+//                        view3D = new Vr3DWidget(tag, position,
+//                                R.drawable.ic_vr_skip_previous, R.drawable.ic_vr_skip_previous, width, height);
                         break;
                     case rewind30s:
-                        view3D = new Vr3DWidget(tag, position,
-                                R.drawable.ic_vr_rewind_30, R.drawable.ic_vr_rewind_30, width, height);
+                        FrameLayout layoutRewind = new FrameLayout(context);
+                        FrameLayout.LayoutParams layoutParamsRewind = new FrameLayout.LayoutParams((int) width, (int) height);
+                        layoutRewind.setBackground(DrawableUtils.drawCircle(UNFOCUSED_COLOR));
+                        layoutRewind.setForegroundGravity(Gravity.CENTER);
+                        layoutRewind.setPadding(10, 10, 10, 10);
+                        layoutRewind.setLayoutParams(layoutParamsRewind);
+                        AppCompatImageView rewindView = new AppCompatImageView(context);
+                        rewindView.setImageResource(R.drawable.ic_vr_rewind_30);
+                        layoutRewind.addView(rewindView);
+                        view3D = new Vr3DView(tag, position, layoutRewind, width, height);
                         break;
                     case play:
+                        FrameLayout layoutControl = new FrameLayout(context);
+                        FrameLayout.LayoutParams layoutParamsControl = new FrameLayout.LayoutParams((int) width, (int) height);
+                        layoutControl.setBackground(DrawableUtils.drawCircle(UNFOCUSED_COLOR));
+                        layoutControl.setForegroundGravity(Gravity.CENTER);
+                        layoutControl.setPadding(30, 30, 30, 30);
+                        layoutControl.setLayoutParams(layoutParamsControl);
                         AppCompatImageView controlView = new AppCompatImageView(context);
                         controlView.setImageResource(iMediaPlayer.isPlaying() ? R.drawable.ic_vr_pause : R.drawable.ic_vr_play);
-                        view3D = new Vr3DView(tag, position, controlView, width, height);
+                        layoutControl.addView(controlView);
+                        view3D = new Vr3DView(tag, position, layoutControl, width, height);
                         break;
                     case fastForward30s:
-                        view3D = new Vr3DWidget(tag, position,
-                                R.drawable.ic_vr_fast_forward_30, R.drawable.ic_vr_fast_forward_30, width, height);
+                        FrameLayout layoutFastForward = new FrameLayout(context);
+                        FrameLayout.LayoutParams layoutParamsFastForward = new FrameLayout.LayoutParams((int) width, (int) height);
+                        layoutFastForward.setBackground(DrawableUtils.drawCircle(UNFOCUSED_COLOR));
+                        layoutFastForward.setForegroundGravity(Gravity.CENTER);
+                        layoutFastForward.setPadding(10, 10, 10, 10);
+                        layoutFastForward.setLayoutParams(layoutParamsFastForward);
+                        AppCompatImageView fastForwardView = new AppCompatImageView(context);
+                        fastForwardView.setImageResource(R.drawable.ic_vr_fast_forward_30);
+                        layoutFastForward.addView(fastForwardView);
+                        view3D = new Vr3DView(tag, position, layoutFastForward, width, height);
                         break;
                     case skipNext:
-                        view3D = new Vr3DWidget(tag, position,
-                                R.drawable.ic_vr_skip_next, R.drawable.ic_vr_skip_next, width, height);
+//                        view3D = new Vr3DWidget(tag, position,
+//                                R.drawable.ic_vr_skip_next, R.drawable.ic_vr_skip_next, width, height);
                         break;
                     case seekBar:
                         AppCompatSeekBar durationSeekBar = new AppCompatSeekBar(context);
@@ -188,14 +216,14 @@ public class Vr3DMediaController implements IMediaController {
                         AppCompatTextView leftDurationTextView = new AppCompatTextView(context);
                         leftDurationTextView.setText(positionString);
                         leftDurationTextView.setTextColor(Color.WHITE);
-                        leftDurationTextView.setTextSize(12.0f);
+                        leftDurationTextView.setTextSize(9.0f);
                         view3D = new Vr3DView(tag, position, leftDurationTextView, width, height);
                         break;
                     case rightDuration:
                         AppCompatTextView rightDurationTextView = new AppCompatTextView(context);
                         rightDurationTextView.setText(durationString);
                         rightDurationTextView.setTextColor(Color.WHITE);
-                        rightDurationTextView.setTextSize(12.0f);
+                        rightDurationTextView.setTextSize(9.0f);
                         view3D = new Vr3DView(tag, position, rightDurationTextView, width, height);
                         break;
                 }
@@ -206,6 +234,22 @@ public class Vr3DMediaController implements IMediaController {
             }
         } else {
             mdvrLibrary.removePlugins();
+        }
+    }
+
+    private void changeBackgroundFocusedView(String tag, boolean isFocused) {
+        if (!Vr3DViewType.rewind30s.tag.equalsIgnoreCase(tag)
+                && !Vr3DViewType.play.tag.equalsIgnoreCase(tag)
+                && !Vr3DViewType.fastForward30s.tag.equalsIgnoreCase(tag)) {
+            return;
+        }
+        MDAbsView mdView = mdvrLibrary.findViewByTag(tag);
+        if (mdView != null) {
+            FrameLayout controlLayout = mdView.castAttachedView(FrameLayout.class);
+            if (controlLayout != null) {
+                controlLayout.setBackground(DrawableUtils.drawCircle(isFocused ? FOCUSED_COLOR : UNFOCUSED_COLOR));
+                mdView.invalidate();
+            }
         }
     }
 
@@ -228,6 +272,12 @@ public class Vr3DMediaController implements IMediaController {
             case play:
                 iMediaPlayer.toggleControl();
                 break;
+            case rewind30s:
+                iMediaPlayer.rewind();
+                break;
+            case fastForward30s:
+                iMediaPlayer.fastForward();
+                break;
             case seekBar:
                 if (currentHitPoint != null) {
                     float currentPercentDuration = currentHitPoint.getU();
@@ -242,6 +292,7 @@ public class Vr3DMediaController implements IMediaController {
         if (lastFocusedTag != null && !lastFocusedTag.equalsIgnoreCase(tag)
                 && !Vr3DViewType.container.tag.equalsIgnoreCase(tag)) {
             iMediaPlayer.focusChanged(false);
+            changeBackgroundFocusedView(lastFocusedTag, false);
             lastFocusedTag = tag;
             checkFocusDisposable.dispose();
             return;
@@ -255,11 +306,13 @@ public class Vr3DMediaController implements IMediaController {
         }
         iMediaPlayer.focusChanged(true);
         lastFocusedTag = tag;
+        changeBackgroundFocusedView(lastFocusedTag, true);
         checkFocusDisposable = Observable.interval(FOCUSED_CHECK_IN_SECONDS, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(period -> {
                     iMediaPlayer.focusChanged(false);
+                    changeBackgroundFocusedView(lastFocusedTag, false);
                     checkFocusDisposable.dispose();
                     if (!lastFocusedTag.equalsIgnoreCase(currentTag)) {
                         return;
@@ -278,16 +331,16 @@ public class Vr3DMediaController implements IMediaController {
     }
 
     private enum Vr3DViewType {
-        container("md-tag-container", 0.0f, CONTROLLER_DISTANCE_TO_EYE + 0.2f, -6.4f, 9.0f, 4.8f),
-        titleVideo("md-tag-title-video", 0.0f, CONTROLLER_DISTANCE_TO_EYE, -7.6f, 7.6f, 1.6f),
-        skipPrevious("md-tag-skip-previous", -2.2f, CONTROLLER_DISTANCE_TO_EYE, -6.0f, 0.4f, 0.4f),
-        rewind30s("md-tag-rewind-30s", -1.2f, CONTROLLER_DISTANCE_TO_EYE, -6.0f, 0.7f, 0.7f),
-        play("md-tag-play", 0.0f, CONTROLLER_DISTANCE_TO_EYE, -6.0f, 1.2f, 1.2f),
-        fastForward30s("md-tag-fast-forward-30s", 1.2f, CONTROLLER_DISTANCE_TO_EYE, -6.0f, 0.7f, 0.7f),
-        skipNext("md-tag-skip-next", 2.2f, CONTROLLER_DISTANCE_TO_EYE, -6.0f, 0.4f, 0.4f),
-        seekBar("md-tag-seek-bar", 0.0f, CONTROLLER_DISTANCE_TO_EYE, -5.0f, 9.0f, 1.0f),
-        leftDuration("md-tag-left-duration", -3.3f, CONTROLLER_DISTANCE_TO_EYE, -4.4f, 2.2f, 1.0f),
-        rightDuration("md-tag-right-duration", 4.0f, CONTROLLER_DISTANCE_TO_EYE, -4.4f, 2.3f, 1.0f);
+        container("md-tag-container", 0.0f, -10.84f, CONTROLLER_DISTANCE_TO_EYE + 0.2f, 7.0f, 4.8f),
+        titleVideo("md-tag-title-video", 0.0f, -10.8f, CONTROLLER_DISTANCE_TO_EYE, 6.0f, 1.2f),
+        skipPrevious("md-tag-skip-previous", -2.2f, -12.0f, CONTROLLER_DISTANCE_TO_EYE, 0.4f, 0.4f),
+        rewind30s("md-tag-rewind-30s", -1.0f, -12.0f, CONTROLLER_DISTANCE_TO_EYE, 0.8f, 0.8f),
+        play("md-tag-play", 0.0f, -12.0f, CONTROLLER_DISTANCE_TO_EYE, 1.0f, 1.0f),
+        fastForward30s("md-tag-fast-forward-30s", 1.0f, -12.0f, CONTROLLER_DISTANCE_TO_EYE, 0.8f, 0.8f),
+        skipNext("md-tag-skip-next", 2.2f, -12.0f, CONTROLLER_DISTANCE_TO_EYE, 0.4f, 0.4f),
+        seekBar("md-tag-seek-bar", 0.0f, -13.0f, CONTROLLER_DISTANCE_TO_EYE, 6.0f, 0.6f),
+        leftDuration("md-tag-left-duration", -1.9f, -13.7f, CONTROLLER_DISTANCE_TO_EYE, 2.2f, 1.0f),
+        rightDuration("md-tag-right-duration", 2.9f, -13.7f, CONTROLLER_DISTANCE_TO_EYE, 2.3f, 1.0f);
 
         static Vr3DViewType getTypeByTag(@NonNull String tag) {
             for (Vr3DViewType type : Vr3DViewType.values()) {

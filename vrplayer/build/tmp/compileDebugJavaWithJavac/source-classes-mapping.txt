@@ -19,6 +19,8 @@ com/appixiplugin/vrplayer/utils/StatusBarUtil.java
  com.appixiplugin.vrplayer.utils.StatusBarUtil
 com/appixiplugin/vrplayer/custom/CircleProgressBar.java
  com.appixiplugin.vrplayer.custom.CircleProgressBar
+com/appixiplugin/vrplayer/utils/DrawableUtils.java
+ com.appixiplugin.vrplayer.utils.DrawableUtils
 com/appixiplugin/vrplayer/base/BaseActivity.java
  com.appixiplugin.vrplayer.base.BaseActivity
 com/appixiplugin/vrplayer/presentation/VrPlayerActivity.java

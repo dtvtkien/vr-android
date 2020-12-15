@@ -133,6 +133,7 @@ public class VrMediaController extends FrameLayout implements IMediaController {
                 binding.motionLayoutControlBox.setVisibility(VISIBLE);
                 binding.constraintVolume.setVisibility(VISIBLE);
                 binding.imgSettings.setVisibility(GONE);
+                showHideCenterIcon(false);
                 break;
 
             case STEREO:

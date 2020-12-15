@@ -16,11 +16,11 @@ public class VrStereoDirectorFilter implements MDVRLibrary.IDirectorFilter {
 
     @Override
     public float onFilterPitch(float input) {
-        if (input > filterAngle + 10) {
-            return filterAngle + 10;
+        if (input > filterAngle) {
+            return filterAngle;
         }
-        if (input < -filterAngle - 10) {
-            return -filterAngle - 10;
+        if (input < -filterAngle) {
+            return -filterAngle;
         }
         return input;
     }
